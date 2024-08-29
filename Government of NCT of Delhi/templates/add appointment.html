@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Patient</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #FFF3C7;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 500px;
+                margin: 50px auto;
+                background-color: #FFF8E3;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+                text-align: left;
+                /* Align form group items to the left */
+            }
+
+            label {
+                font-weight: bold;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            select {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            input[type="submit"],
+            .btn-appointment {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                background-color: #00637f;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            input[type="submit"]:hover,
+            .btn-appointment:hover {
+                background-color: #0056b3;
+            }
+
+            .center-button-container {
+                display: flex;
+                justify-content: center;
+                /* Center the button horizontally */
+                margin-top: 20px;
+                /* Optional: add some space above the button */
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container appointment">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-data">
+                        <div class="form-head">
+                            <h2>Book Appointment</h2>
+                        </div>
+                        <form method="post" action="/appointment">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label for="nameInput" class="form-label">Full Name</label>
+                                    <input type="text" id="nameInput" placeholder="Enter Full Name" name='name'
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="numberInput" class="form-label">Mobile Number</label>
+                                    <input type="text" id="numberInput" placeholder="Enter Mobile Number" name='number'
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailInput" class="form-label">Email Address</label>
+                                    <input type="text" id="emailInput" placeholder="Enter Email Address" name='email'
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addressInput" class="form-label">Address</label>
+                                    <input type="text" id="addressInput" placeholder="Enter Your Address" name='Address'
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateInput" class="form-label">Appointment Date</label>
+                                    <input type="date" id="dateInput" name='dat' class="form-control">
+                                </div>
+                                <!-- Time Slot Selection in 24-hour Format -->
+                                <div class="form-group">
+                                    <label for="timeSlot">Select Time Slot:</label>
+                                    <select id="timeSlot" name='timeSlot' class="form-control">
+                                        <option value="" disabled selected>Select a time slot</option>
+                                        <option value="00:00 - 01:00">00:00 - 01:00</option>
+                                        <option value="01:00 - 02:00">01:00 - 02:00</option>
+                                        <option value="02:00 - 03:00">02:00 - 03:00</option>
+                                        <option value="03:00 - 04:00">03:00 - 04:00</option>
+                                        <option value="04:00 - 05:00">04:00 - 05:00</option>
+                                        <option value="05:00 - 06:00">05:00 - 06:00</option>
+                                        <option value="06:00 - 07:00">06:00 - 07:00</option>
+                                        <option value="07:00 - 08:00">07:00 - 08:00</option>
+                                        <option value="08:00 - 09:00">08:00 - 09:00</option>
+                                        <option value="09:00 - 10:00">09:00 - 10:00</option>
+                                        <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                        <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                        <option value="12:00 - 13:00">12:00 - 13:00</option>
+                                        <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                        <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                        <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                        <option value="16:00 - 17:00">16:00 - 17:00</option>
+                                        <option value="17:00 - 18:00">17:00 - 18:00</option>
+                                        <option value="18:00 - 19:00">18:00 - 19:00</option>
+                                        <option value="19:00 - 20:00">19:00 - 20:00</option>
+                                        <option value="20:00 - 21:00">20:00 - 21:00</option>
+                                        <option value="21:00 - 22:00">21:00 - 22:00</option>
+                                        <option value="22:00 - 23:00">22:00 - 23:00</option>
+                                        <option value="23:00 - 00:00">23:00 - 00:00</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="diseaseInput">Select Speciality:</label>
+                                    <select id="diseaseInput" name='diseaseInput' class="form-control">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Medicine">Medicine</option>
+                                        <option value="orthopedic">Orthopedic</option>
+                                        <option value="mental_health">Mental Health</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="cancer">Cancer</option>
+                                        <option value="covid-19">COVID-19</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="dentistry">Dentistry</option>
+                                        <option value="neurology">Neurology</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                        <option value="infectious_diseases">Infectious Diseases</option>
+                                        <option value="ent">ENT (Otolaryngology)</option>
+                                        <option value="plastic_surgery">Plastic Surgery</option>
+                                        <option value="radiology">Radiology</option>
+                                        <option value="pulmonology">Pulmonology</option>
+                                        <option value="gastroenterology">Gastroenterology</option>
+                                    </select>
+                                </div>
+                                <!-- Doctor Selection -->
+                                <div class="form-group">
+                                    <label for="doctorName">Select Doctor:</label>
+                                    <select id="doctorName" name='doctorName' class="form-control">
+                                        <option value="" disabled selected>Select doctor</option>
+                                        <option value="Dr. Smith">Dr. Smith</option>
+                                        <option value="Dr. Johnson">Dr. Johnson</option>
+                                        <option value="Dr. Williams">Dr. Williams</option>
+                                        <option value="Dr. Brown">Dr. Brown</option>
+                                        <!-- Add more doctors as needed -->
+                                    </select>
+                                </div>
+                                <!-- Time Slot Selection -->
+                                <div class="form-group">
+                                    <label for="diseaseDescription">Description Disease:</label>
+                                    <input type="text" placeholder="Enter Disease Description" name='diseaseDescription'
+                                        class="form-control">
+                                </div>
+                                <!-- Centered Button Container -->
+                                <div class="center-button-container">
+                                    <button class="btn btn-success btn-appointment" id="appointment" type="submit">Book
+                                        Appointment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

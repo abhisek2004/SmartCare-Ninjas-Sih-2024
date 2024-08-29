@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Booking Successful</title>
+        <link rel="stylesheet" href="../opd/static/css/success.css">
+    </head>
+
+    <body>
+        <div class="success-container">
+            <h1>Booking Successful!</h1>
+            <p>Your bed has been booked successfully.</p>
+            <p>Bed Number: <span id="bed-number"></span></p>
+            <a href="../opd/index.html" class="back-button">Back to Home</a>
+        </div>
+    </body>
+    <script>
+        // Display the bed number from the previous booking page
+        const urlParams = new URLSearchParams(window.location.search);
+        const bedNumber = urlParams.get('bed');
+        document.getElementById('bed-number').innerText = bedNumber || "N/A";
+    </script>
+    <script src="../opd/static/js/success.js"></script>
+
+</html>

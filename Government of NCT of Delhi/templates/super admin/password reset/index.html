@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Reset</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #FFF3C7;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background: #FFF8E3;
+                padding: 2em;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                text-align: center;
+            }
+
+            h1 {
+                margin-bottom: 1em;
+            }
+
+            label {
+                display: block;
+                margin: 0.5em 0 0.2em;
+                text-align: left;
+            }
+
+            input,
+            select {
+                width: 100%;
+                padding: 0.8em;
+                margin-bottom: 1em;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            button {
+                background-color: #00637f !important;
+                color: white;
+                padding: 0.8em;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 1em;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            .radio-group {
+                text-align: left;
+                margin-bottom: 1em;
+            }
+
+            .radio-group label {
+                display: inline-block;
+                margin: 0 1em 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Password Reset</h1>
+            <form id="reset-request-form">
+                <div class="radio-group">
+                    <label><input type="radio" name="resetMethod" value="email" checked>Email</label>
+                    <label><input type="radio" name="resetMethod" value="username">Username</label>
+                    <label><input type="radio" name="resetMethod" value="phone">Phone Number</label>
+                </div>
+
+                <div id="email-field">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div id="username-field" style="display: none;">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                </div>
+
+                <div id="phone-field" style="display: none;">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <label for="userType">User Type:</label>
+                <select id="userType" name="userType" required>
+                    <option value="doctor">Doctor</option>
+                    <option value="patient">Patient</option>
+                </select>
+
+                <button type="submit">Send Reset Link</button>
+            </form>
+            <p id="reset-request-message"></p>
+        </div>
+
+        <script>
+            document.querySelectorAll('input[name="resetMethod"]').forEach((radio) => {
+                radio.addEventListener('change', () => {
+                    document.getElementById('email-field').style.display = 'none';
+                    document.getElementById('username-field').style.display = 'none';
+                    document.getElementById('phone-field').style.display = 'none';
+
+                    const selectedMethod = document.querySelector('input[name="resetMethod"]:checked').value;
+
+                    if (selectedMethod === 'email') {
+                        document.getElementById('email-field').style.display = 'block';
+                        document.getElementById('email').required = true;
+                        document.getElementById('username').required = false;
+                        document.getElementById('phone').required = false;
+                    } else if (selectedMethod === 'username') {
+                        document.getElementById('username-field').style.display = 'block';
+                        document.getElementById('email').required = false;
+                        document.getElementById('username').required = true;
+                        document.getElementById('phone').required = false;
+                    } else if (selectedMethod === 'phone') {
+                        document.getElementById('phone-field').style.display = 'block';
+                        document.getElementById('email').required = false;
+                        document.getElementById('username').required = false;
+                        document.getElementById('phone').required = true;
+                    }
+                });
+            });
+
+            document.getElementById('reset-request-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const username = document.getElementById('username').value;
+                const phone = document.getElementById('phone').value;
+                const userType = document.getElementById('userType').value;
+                const resetMethod = document.querySelector('input[name="resetMethod"]:checked').value;
+
+                const data = { userType, resetMethod };
+                if (resetMethod === 'email') data.email = email;
+                if (resetMethod === 'username') data.username = username;
+                if (resetMethod === 'phone') data.phone = phone;
+
+                const response = await fetch('/request-reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const message = await response.text();
+                document.getElementById('reset-request-message').textContent = message;
+            });
+
+            // Trigger initial display
+            document.querySelector('input[name="resetMethod"]:checked').dispatchEvent(new Event('change'));
+        </script>
+    </body>
+
+</html>

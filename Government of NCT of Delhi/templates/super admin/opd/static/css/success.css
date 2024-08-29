@@ -1,0 +1,61 @@
+/* Add to styles.css */
+
+.success-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    text-align: center;
+    margin: 100px auto;
+}
+
+.success-container h1 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.success-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .success-container {
+        padding: 20px;
+        margin: 50px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-container {
+        padding: 15px;
+    }
+
+    .success-container h1 {
+        font-size: 24px;
+    }
+
+    .success-container p {
+        font-size: 16px;
+    }
+
+    .back-button {
+        font-size: 14px;
+    }
+}
