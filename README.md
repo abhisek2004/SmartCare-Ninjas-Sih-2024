@@ -16,7 +16,6 @@
 ![SIH 2024 Smart Care Ninjas PPT-6](https://github.com/user-attachments/assets/ddf2db52-914d-4b09-b610-ded3f50cc786)
 
 
-Based on the problem statement and the objectives outlined, here are some additional webpages that could be required to support the complete functionality of the hospital management system:
 
 ## Required Webpages:
 
