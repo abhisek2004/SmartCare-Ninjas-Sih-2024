@@ -8,7 +8,7 @@
 SIH 2024 Smart Care Ninjas PPT
 ![SIH 2024 Smart Care Ninjas PPT-1](https://github.com/user-attachments/assets/da0c281a-62a6-4b43-b0c8-7dd79dddb2ba)
 ![SIH 2024 Smart Care Ninjas PPT-2](https://github.com/user-attachments/assets/6d94ed24-28bc-4665-ba47-5340d8c39104)
-![SIH 2024 Smart Care Ninjas PPT-3](https://github.com/user-attachments/assets/c8b56753-9993-4143-bbed-7c2
+![SIH 2024 Smart Care Ninjas PPT-3](https://github.com/user-attachments/assets/c8b56753-9993-4143-bbed-7c2)
 ![SIH 2024 Smart Care Ninjas PPT-4](https://github.com/user-attachments/assets/945a74a6-ba45-4b9e-afbe-5b51adf3ec68)
 89ac9c349)
 ![SIH 2024 Smart Care Ninjas PPT-5](https://github.com/user-attachments/assets/26f03832-8a7b-4ac2-bbca-fb9af0e3a53e)
