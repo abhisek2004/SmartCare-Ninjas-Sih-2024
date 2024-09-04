@@ -5,7 +5,7 @@
 
 ![Untitled-2024-09-02-0038](https://github.com/user-attachments/assets/d3e92cef-775f-4cc8-afd6-468456818d5a)
 
-#SIH 2024 Smart Care Ninjas PPT
+# SIH 2024 Smart Care Ninjas PPT
 
 
 ![SIH 2024 Smart Care Ninjas PPT-1](https://github.com/user-attachments/assets/da0c281a-62a6-4b43-b0c8-7dd79dddb2ba)
