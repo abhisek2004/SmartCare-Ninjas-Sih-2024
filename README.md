@@ -1,12 +1,15 @@
 # sih-hospital
+
+# SIH STATEMENT
 ![Screenshot 2024-08-15 235259](https://github.com/user-attachments/assets/f1f8b416-fe17-49f9-ac4b-33731f7eb0b0)
 
+# OUR WORKFLOW
 ![Untitled-2024-08-15-2355](https://github.com/user-attachments/assets/038616ab-b263-419c-9ce2-d6dcd03690ac)
 
+# FLOW CHART
 ![Untitled-2024-09-02-0038](https://github.com/user-attachments/assets/d3e92cef-775f-4cc8-afd6-468456818d5a)
 
 # SIH 2024 Smart Care Ninjas PPT
-
 
 ![SIH 2024 Smart Care Ninjas PPT-1](https://github.com/user-attachments/assets/da0c281a-62a6-4b43-b0c8-7dd79dddb2ba)
 ![SIH 2024 Smart Care Ninjas PPT-2](https://github.com/user-attachments/assets/6d94ed24-28bc-4665-ba47-5340d8c39104)
