@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stock Product Available - Inventory Manager</title>
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #FFF3C7;
+                margin: 0;
+                padding: 0;
+            }
+
+            .navbar {
+                background-color: #00637f !important;
+            }
+
+            .sidebar {
+                width: 250px;
+                background-color: #343a40;
+                position: fixed;
+                height: 100%;
+                color: #fff;
+                padding-top: 20px;
+            }
+
+            .sidebar a {
+                padding: 15px;
+                text-decoration: none;
+                color: #fff;
+                display: block;
+                transition: 0.3s;
+            }
+
+            .sidebar a:hover {
+                background-color: #575757;
+            }
+
+            .main-content {
+                margin-left: 250px;
+                padding: 20px;
+            }
+
+            .table-container {
+                margin: 20px auto;
+                width: 100%;
+                max-width: 800px;
+                background-color: #FFF8E3;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #00637f;
+                color: white;
+            }
+
+            .quantity-control {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .quantity-control button {
+                background-color: #00637f;
+                color: #fff;
+                border: none;
+                padding: 5px 10px;
+                margin: 0 5px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .quantity-control button:hover {
+                background-color: #004f61;
+            }
+
+            .quantity-control input {
+                width: 50px;
+                text-align: center;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .action-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .action-buttons button {
+                background-color: #00637f;
+                color: #fff;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .action-buttons button:hover {
+                background-color: #004f61;
+            }
+
+            .add-product-form {
+                margin: 20px auto;
+                width: 100%;
+                max-width: 800px;
+                background-color: #FFF8E3;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .add-product-form input,
+            .add-product-form button {
+                margin: 10px 0;
+                padding: 10px;
+                width: calc(33.33% - 22px);
+                /* Adjust width to fit three in a row */
+            }
+
+            .add-product-form button {
+                width: auto;
+                background-color: #00637f;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .add-product-form button:hover {
+                background-color: #004f61;
+            }
+
+            .form-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/delhi.png" alt="Delhi Logo" class="rounded-circle" width="40" height="40">
+            </a>
+            <h3 class="text-light">Government of NCT of Delhi</h3>
+        </div>
+
+        <div class="sidebar">
+            <a href="./inv_admin.html">Dashboard</a>
+            <a href="/">Logout</a>
+        </div>
+
+        <div class="main-content">
+            <div class="table-container">
+                <h2>Stock Product Available</h2>
+                <table id="productTable">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Quantity</th>
+                            <th>Rack Location</th>
+                            <th>Adjust Quantity</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example row -->
+                        <tr>
+                            <td>Paracetamol</td>
+                            <td><span class="quantity">100</span></td>
+                            <td>A1</td>
+                            <td class="quantity-control">
+                                <button onclick="decreaseQuantity(this)">-</button>
+                                <input type="number" value="100" min="0" readonly>
+                                <button onclick="increaseQuantity(this)">+</button>
+                            </td>
+                            <td class="action-buttons">
+                                <button onclick="submitChanges(this)">Submit</button>
+                                <button onclick="deleteProduct(this)">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Additional rows can be dynamically generated here -->
+                         
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="add-product-form">
+                <h2>Add New Product</h2>
+                <div class="form-row">
+                    <input type="text" id="productName" placeholder="Product Name" required>
+                    <input type="number" id="productQuantity" placeholder="Quantity" min="1" required>
+                    <input type="text" id="rackLocation" placeholder="Rack Location" required>
+                    <button onclick="addProduct()">Add Product</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function increaseQuantity(button) {
+                let input = button.previousElementSibling;
+                let currentQuantity = parseInt(input.value);
+                input.value = currentQuantity + 1;
+                updateDisplayQuantity(input);
+            }
+
+            function decreaseQuantity(button) {
+                let input = button.nextElementSibling;
+                let currentQuantity = parseInt(input.value);
+                if (currentQuantity > 0) {
+                    input.value = currentQuantity - 1;
+                    updateDisplayQuantity(input);
+                }
+            }
+
+            function updateDisplayQuantity(input) {
+                let quantityDisplay = input.closest('tr').querySelector('.quantity');
+                quantityDisplay.textContent = input.value;
+            }
+
+            function addProduct() {
+                // Get input values
+                let name = document.getElementById('productName').value;
+                let quantity = document.getElementById('productQuantity').value;
+                let rack = document.getElementById('rackLocation').value;
+
+                // Validate inputs
+                if (name && quantity && rack) {
+                    // Create a new row
+                    let table = document.getElementById('productTable').getElementsByTagName('tbody')[0];
+                    let newRow = table.insertRow();
+
+                    // Add cells to the row
+                    let cell1 = newRow.insertCell(0);
+                    let cell2 = newRow.insertCell(1);
+                    let cell3 = newRow.insertCell(2);
+                    let cell4 = newRow.insertCell(3);
+                    let cell5 = newRow.insertCell(4);
+
+                    // Set the cell values
+                    cell1.innerHTML = name;
+                    cell2.innerHTML = `<span class="quantity">${quantity}</span>`;
+                    cell3.innerHTML = rack;
+                    cell4.innerHTML = `
+                    <div class="quantity-control">
+                        <button onclick="decreaseQuantity(this)">-</button>
+                        <input type="number" value="${quantity}" min="0" readonly>
+                        <button onclick="increaseQuantity(this)">+</button>
+                    </div>`;
+                    cell5.innerHTML = `
+                    <div class="action-buttons">
+                        <button onclick="submitChanges(this)">Submit</button>
+                        <button onclick="deleteProduct(this)">Delete</button>
+                    </div>`;
+
+                    // Clear input fields
+                    document.getElementById('productName').value = '';
+                    document.getElementById('productQuantity').value = '';
+                    document.getElementById('rackLocation').value = '';
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            }
+
+            function submitChanges(button) {
+                let row = button.closest('tr');
+                let quantityInput = row.querySelector('.quantity-control input');
+                let newQuantity = quantityInput.value;
+                let productName = row.cells[0].textContent;
+
+                // Simulate saving changes to the server
+                alert(`Changes submitted for ${productName}: New Quantity = ${newQuantity}`);
+            }
+
+            function deleteProduct(button) {
+                if (confirm('Are you sure you want to delete this product?')) {
+                    let row = button.closest('tr');
+                    row.remove();
+                    // Simulate server deletion here if necessary
+                }
+            }
+        </script>
+    </body>
+
+</html>

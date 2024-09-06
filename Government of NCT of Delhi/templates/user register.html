@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/user_login.css" />
+    <style>
+      body {
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* height: 100vh; */
+        /* Adjusted to cover the full viewport height */
+        /* margin: 0; */
+        /* Remove default margin */
+        /* background-color: #f8f9fa; */
+        /* Light gray background color */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #00e1ff;
+        background-image: url("../static/images/registration.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        background-color: #343a40;
+        /* Dark background color */
+      }
+
+      .navbar-brand .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-brand .logo h4 {
+        margin-bottom: 0;
+        color: #fff;
+        /* White color for logo text */
+      }
+
+      .navbar-brand .mehran {
+        color: #fff;
+        /* White color for brand name */
+        margin-left: 20px;
+      }
+
+      .navbar-nav .nav-link {
+        color: #fff !important;
+        /* White color for nav links */
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #ccc !important;
+        /* Light gray color on hover */
+      }
+
+      /* Registration Form */
+      .registration-container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff83;
+        /* White background color */
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgb(0, 0, 0);
+        /* Shadow effect */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Center items horizontally */
+        text-align: left;
+        /* Center text */
+      }
+
+      .registration-container h2 {
+        margin-bottom: 20px;
+        color: #343a40;
+        /* Dark color for headings */
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-control {
+        border: 1px solid #ced4da;
+        /* Gray border */
+      }
+
+      .btn-primary {
+        background-color: #00637f !important;
+        /* Primary button color */
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+        /* Darker shade on hover */
+      }
+
+      .navbar {
+        background-color: #388b00;
+        /* Dark blue color */
+      }
+
+      .bg-primary {
+        background-color: #00637f !important;
+      }
+
+      .text-align-center {
+        text-align: center;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+      }
+
+      .strength {
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      .poor {
+        color: red;
+      }
+
+      .weak {
+        color: orange;
+      }
+
+      .strong {
+        color: green;
+      }
+
+      .input-group .form-control {
+        border-right: none;
+      }
+
+      .input-group-append .input-group-text {
+        border-left: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <section class="header">
+      <nav class="navbar navbar-expand-lg bg-primary sticky-navbar" data-bs-theme="dark">
+        <div class="container-fluid">
+          <!-- Add the logo here -->
+          <a class="navbar-brand" href="#">
+            <img src="../static/images/delhi.png" alt="Delhi Logo" class="rounded-circle" width="40" height="40" />
+          </a>
+          <h3 class="mehran">Government of NCT of Delhi</h3>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav ms-auto justify-content-end navbar1">
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/">Home</a>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/#about">About Us</a>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/#doctors">Doctors</a>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/#departments">Departments</a>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/#contact">Contact Us</a>
+              </li>
+              <!-- Dropdown Menu -->
+              <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Hospital
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/templates/user login.html">Opd</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/templates/user login.html">Medicines</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/templates/user login.html">Blood Bank</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/templates/user login.html">Bed Available</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="adminDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/admin/dashboard.html">Login</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/admin/manage-users.html">Add Patient or Register</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/admin/reports.html">Add Hospital</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/admin/settings.html">Settings</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/templates/user login.html">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Registration Form -->
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+      <div class="registration-container">
+        <h2>Create Account</h2>
+        <form method="POST" id="registrationForm">
+          <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+              title="Please enter a valid name. Only letters and spaces are allowed, and the name cannot consist of only spaces." />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control" id="phone" name="phone" maxlength="13"
+              pattern="(\+91[-\s]?)?[6-9]{1}[0-9]{9}" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required />
+          </div>
+
+
+          <!-- <div class="container"> -->
+          <!-- <h2>Login Form</h2> -->
+          <form id="loginForm" onsubmit="return validateForm()">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username" required
+                pattern="^[A-Za-z][A-Za-z0-9]*$"
+                title="Username must start with a letter, can contain letters and numbers, but cannot be entirely numeric." />
+              <small class="error" id="usernameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password" required
+                  oninput="checkPasswordStrength()" />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fas fa-eye" id="togglePassword" onclick="togglePasswordVisibility()"
+                      style="cursor: pointer;"></i>
+                  </span>
+                </div>
+              </div>
+              <small class="strength" id="passwordStrength"></small>
+              <small class="error" id="passwordError"></small>
+            </div>
+
+            <!-- Font Awesome Icon Library -->
+            <script src="" crossorigin="anonymous"></script>
+
+
+
+
+            <div class="d-flex justify-content-center">
+              <button type="submit" id="submit" class="btn btn-primary">
+                Register
+              </button>
+            </div>
+          </form>
+          <p class="text-align-center">
+            Already have an account? <a href="/user_login">Login here</a>
+          </p>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("phone")
+        .addEventListener("input", function (event) {
+          const phoneInput = event.target.value;
+          const phonePattern = /^(\+91[-\s]?)?[6-9]{1}[0-9]{9}$/;
+
+          if (!phonePattern.test(phoneInput)) {
+            event.target.setCustomValidity(
+              "Please enter a valid phone number. It should start with a digit between 6 and 9 and can optionally include the country code +91."
+            );
+          } else {
+            event.target.setCustomValidity(""); // Reset the custom error message
+          }
+        });
+    </script>
+
+    <script>
+      document
+        .getElementById("name")
+        .addEventListener("input", function (event) {
+          const nameInput = event.target.value.trim(); // Trim spaces from the start and end
+          const namePattern = /^[A-Za-z]+(\s[A-Za-z]+)*$/; // Pattern for valid names
+
+          if (!namePattern.test(nameInput) || nameInput === "") {
+            event.target.setCustomValidity(
+              "Please enter a valid name. Only letters and spaces are allowed, and the name cannot consist of only spaces."
+            );
+          } else {
+            event.target.setCustomValidity(""); // Reset the custom error message
+          }
+        });
+    </script>
+    <script>
+      document
+        .getElementById("username")
+        .addEventListener("input", function (event) {
+          const usernameInput = event.target.value;
+          const allNumericPattern = /^[0-9]+$/; // Pattern for all numbers
+          const validPattern = /^[A-Za-z][A-Za-z0-9]*$/; // Pattern for valid usernames
+
+          if (
+            allNumericPattern.test(usernameInput) ||
+            !validPattern.test(usernameInput)
+          ) {
+            event.target.setCustomValidity(
+              "Username must start with a letter, can contain letters and numbers, but cannot be entirely numeric."
+            );
+          } else {
+            event.target.setCustomValidity(""); // Reset the custom error message
+          }
+        });
+    </script>
+
+    <!-- <script>
+      Password validation
+      const password = document.getElementById("password").value;
+      const passwordError = document.getElementById("passwordError");
+      const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+      if (!passwordPattern.test(password)) {
+        passwordError.textContent = "Password must be at least 6 characters long, include an uppercase letter, a number, and a special character.";
+        isValid = false;
+      } else {
+        passwordError.textContent = "";
+      }
+
+    </script> -->
+
+    <script>
+      function checkPasswordStrength() {
+        const password = document.getElementById("password").value;
+        const passwordStrength = document.getElementById("passwordStrength");
+
+        let strength = "Poor";
+        let strengthClass = "poor";
+
+        // Strength levels
+        const strongPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Strong: At least 8 characters, 1 uppercase, 1 number, and 1 special character
+        const mediumPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/; // Medium: At least 6 characters, 1 uppercase, and 1 number
+
+        if (strongPattern.test(password)) {
+          strength = "Strong";
+          strengthClass = "strong";
+        } else if (mediumPattern.test(password)) {
+          strength = "Medium";
+          strengthClass = "weak";
+        }
+
+        passwordStrength.textContent = strength;
+        passwordStrength.className = `strength ${strengthClass}`;
+      }
+
+      function validateForm() {
+        let isValid = true;
+
+        // Username validation
+        const username = document.getElementById("username").value;
+        const usernameError = document.getElementById("usernameError");
+        const usernamePattern = /^[A-Za-z][A-Za-z0-9]*$/;
+        if (!usernamePattern.test(username)) {
+          usernameError.textContent = "Invalid username format.";
+          isValid = false;
+        } else {
+          usernameError.textContent = "";
+        }
+
+        // Password validation
+        const password = document.getElementById("password").value;
+        const passwordError = document.getElementById("passwordError");
+        const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+        if (!passwordPattern.test(password)) {
+          passwordError.textContent = "Password must be at least 6 characters long, include an uppercase letter, a number, and a special character.";
+          isValid = false;
+        } else {
+          passwordError.textContent = "";
+        }
+
+        if (isValid) {
+          document.getElementById("Registration Successful").style.display = "block";
+          return false; // Prevent actual form submission for demonstration
+        }
+
+        return isValid;
+      }
+    </script>
+
+    <script>
+      // Function to toggle the password visibility
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          toggleIcon.classList.remove("fa-eye");
+          toggleIcon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          toggleIcon.classList.remove("fa-eye-slash");
+          toggleIcon.classList.add("fa-eye");
+        }
+      }
+    </script>
+
+
+    <!-- <script>
+            const registrationForm = document.getElementById("registrationForm");
+            const name = document.getElementById("name");
+            const phone = document.getElementById("phone");
+            const username = document.getElementById("username");
+            const password = document.getElementById("password");
+
+            registrationForm.addEventListener("submit", (event) => {
+                // Prevent default form submission behavior
+
+                const nameValue = name.value.trim();
+                const phoneValue = phone.value.trim();
+                const usernameValue = username.value.trim();
+                const passwordValue = password.value.trim();
+
+                if (nameValue === "" || phoneValue === "" || usernameValue === "" || passwordValue === "") {
+                    alert("All fields are required.");
+                    return;
+                }
+
+                // You might want to send the data to a server or handle it appropriately here
+                // For demonstration purposes, let's store them in localStorage
+                localStorage.setItem("name", nameValue);
+                localStorage.setItem("phone", phoneValue);
+                localStorage.setItem("username", usernameValue);
+                localStorage.setItem("password", passwordValue);
+
+                // Optionally, you can redirect the user to another page after successful submission
+                // window.location.href = "success.html";
+            });
+        </script> -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+</html>
