@@ -15,6 +15,10 @@
 ![PPT Slide 5](https://github.com/user-attachments/assets/26f03832-8a7b-4ac2-bbca-fb9af0e3a53e)
 ![PPT Slide 6](https://github.com/user-attachments/assets/ddf2db52-914d-4b09-b610-ded3f50cc786)
 
+Sure! Here’s how you can update the instructions to include the new repository:
+
+---
+
 ## 🚀 Getting Started
 
 To get a local copy of this project up and running, follow these steps:
@@ -24,9 +28,18 @@ To get a local copy of this project up and running, follow these steps:
    git clone https://github.com/ManaS066/sih-hospital_.git
    ```
 
+   Or, if you want to clone the SmartCare Ninjas project:
+   ```bash
+   git clone https://github.com/abhisek2004/SmartCare-Ninjas-Sih-2024.git
+   ```
+
 2. **Navigate to the project directory:**
    ```bash
-   cd sih-hospital_
+   cd sih-hospital_  # For the first repository
+   ```
+   or
+   ```bash
+   cd SmartCare-Ninjas-Sih-2024  # For the second repository
    ```
 
 3. **Install the required dependencies:**
@@ -44,7 +57,11 @@ To get a local copy of this project up and running, follow these steps:
    http://localhost:5000
    ```
 
-<hr>
+--- 
+
+Feel free to let me know if you need any further modifications!
+
+<hr> 
 
 <div align="center">
 
