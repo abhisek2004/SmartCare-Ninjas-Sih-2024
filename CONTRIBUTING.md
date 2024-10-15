@@ -127,10 +127,7 @@ Your involvement helps to improve the project and make it better for everyone. T
     ```sh
     git push origin <branch-name>
     ```
-
----
-
-Let me know if you need any further adjustments!
+    
 ### Creating Pull Request
 
 13. **Open a Pull Request:**
