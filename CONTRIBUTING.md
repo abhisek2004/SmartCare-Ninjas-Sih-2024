@@ -20,7 +20,11 @@ Your involvement helps to improve the project and make it better for everyone. T
 
 <hr>
 
-## How to Contribute ?
+Here's the updated "How to Contribute" section with the new repository included:
+
+---
+
+## How to Contribute?
 
 1. **Star the Repo**
 
@@ -33,13 +37,23 @@ Your involvement helps to improve the project and make it better for everyone. T
    - Clone the forked repository to your local machine using the following command:
 
    ```sh
-    git clone https://github.com/<your_user_name>/sih-hospital_.git
+   git clone https://github.com/<your_user_name>/sih-hospital_.git
+   ```
+
+   - Or for the SmartCare Ninjas project:
+
+   ```sh
+   git clone https://github.com/<your_user_name>/SmartCare-Ninjas-Sih-2024.git
    ```
 
    - Navigate to the project folder:
 
    ```sh
-    cd sih-hospital_
+   cd sih-hospital_  # For the first repository
+   ```
+   or
+   ```sh
+   cd SmartCare-Ninjas-Sih-2024  # For the second repository
    ```
 
 4. **Install npm packages:**
@@ -48,7 +62,7 @@ Your involvement helps to improve the project and make it better for everyone. T
    npm install
    ```
 
-5. **Run index.html with any browser (example: chrome etc).**
+5. **Run index.html with any browser (e.g., Chrome).**
 
 6. **Add a reference (remote) to the original repository:**
 
@@ -56,13 +70,19 @@ Your involvement helps to improve the project and make it better for everyone. T
    git remote add upstream https://github.com/ManaS066/sih-hospital_.git
    ```
 
-7. **Check the remotes for this repository.**
+   Or for the SmartCare Ninjas project:
+
+   ```sh
+   git remote add upstream https://github.com/abhisek2004/SmartCare-Ninjas-Sih-2024.git
+   ```
+
+7. **Check the remotes for this repository:**
 
    ```sh
    git remote -v
    ```
 
-8. **Always take a pull from the upstream repository to your master branch to keep it at par with the main project (updated repository).**
+8. **Always pull from the upstream repository to your master branch to keep it updated:**
 
    ```sh
    git pull upstream main
@@ -70,7 +90,7 @@ Your involvement helps to improve the project and make it better for everyone. T
 
 9. **Create a New Branch and Move to the Branch:**
 
-   - Create a new branch for your changes and move to that branch using the following commands:
+   - Create a new branch for your changes and switch to that branch:
 
    ```sh
    git checkout -b <branch-name>
@@ -78,19 +98,19 @@ Your involvement helps to improve the project and make it better for everyone. T
 
 10. **Add Your Changes:**
 
-    - After you have made your changes, check the status of the changed files using the following command:
+    - After making your changes, check the status of the modified files:
 
     ```sh
     git status -s
     ```
 
-    - Add all the files to the staging area using the following command:
+    - Add all the files to the staging area:
 
     ```sh
     git add .
     ```
 
-    or add specific files using:
+    Or add specific files:
 
     ```sh
     git add <file_name1> <file_name2>
@@ -98,18 +118,23 @@ Your involvement helps to improve the project and make it better for everyone. T
 
 11. **Commit Your Changes:**
 
-    - Commit your changes with a descriptive message using the following command:
+    - Commit your changes with a descriptive message:
 
     ```sh
     git commit -m "<EXPLAIN-YOUR_CHANGES>"
     ```
 
 12. **Push Your Changes:**
-    - Push your changes to your forked repository on GitHub using the following command:
+
+    - Push your changes to your forked repository on GitHub:
+
     ```sh
     git push origin <branch-name>
     ```
 
+---
+
+Let me know if you need any further adjustments!
 ### Creating Pull Request
 
 13. **Open a Pull Request:**
