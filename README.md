@@ -15,10 +15,6 @@
 ![PPT Slide 5](https://github.com/user-attachments/assets/26f03832-8a7b-4ac2-bbca-fb9af0e3a53e)
 ![PPT Slide 6](https://github.com/user-attachments/assets/ddf2db52-914d-4b09-b610-ded3f50cc786)
 
-Sure! Here’s how you can update the instructions to include the new repository:
-
----
-
 ## 🚀 Getting Started
 
 To get a local copy of this project up and running, follow these steps:
