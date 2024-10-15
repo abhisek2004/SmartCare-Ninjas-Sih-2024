@@ -53,10 +53,6 @@ To get a local copy of this project up and running, follow these steps:
    http://localhost:5000
    ```
 
---- 
-
-Feel free to let me know if you need any further modifications!
-
 <hr> 
 
 <div align="center">
