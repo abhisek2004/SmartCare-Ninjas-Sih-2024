@@ -63,12 +63,6 @@ Your involvement helps to improve the project and make it better for everyone. T
 6. **Add a reference (remote) to the original repository:**
 
    ```sh
-   git remote add upstream https://github.com/ManaS066/sih-hospital_.git
-   ```
-
-   Or for the SmartCare Ninjas project:
-
-   ```sh
    git remote add upstream https://github.com/abhisek2004/SmartCare-Ninjas-Sih-2024.git
    ```
 
