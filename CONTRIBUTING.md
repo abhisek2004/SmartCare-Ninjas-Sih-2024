@@ -20,10 +20,6 @@ Your involvement helps to improve the project and make it better for everyone. T
 
 <hr>
 
-Here's the updated "How to Contribute" section with the new repository included:
-
----
-
 ## How to Contribute?
 
 1. **Star the Repo**
