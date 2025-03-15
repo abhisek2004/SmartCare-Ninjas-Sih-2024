@@ -2,9 +2,6 @@
 
 ## SIH - Hospital
 
-![Screenshot 1](https://github.com/user-attachments/assets/f1f8b416-fe17-49f9-ac4b-33731f7eb0b0)
-![Screenshot 2](https://github.com/user-attachments/assets/038616ab-b263-419c-9ce2-d6dcd03690ac)
-![Screenshot 3](https://github.com/user-attachments/assets/d3e92cef-775f-4cc8-afd6-468456818d5a)
 
 ### SIH 2024 Smart Care Ninjas PPT
 
