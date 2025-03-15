@@ -320,20 +320,6 @@ A robust technological solution that addresses queuing models, bed availability,
 
 <hr>
 
-### 📸 Website Preview
-
-<img src="./img/1.png" />
-<img src="./img/2.png" />
-<img src="./img/3.png" />
-<img src="./img/4.png" />
-<img src="./img/5.png" />
-<img src="./img/6.png" />
-<img src="./img/7.png" />
-<img src="./img/8.png" />
-<img src="./img/9.png" />
-<img src="./img/10.png" />
-<img src="./img/11.png" />
-<img src="./img/12.png" />
 
 🌐 **Visit our website:** [sih-hospital_](#)
 
