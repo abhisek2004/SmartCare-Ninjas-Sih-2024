@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Contact Us Data</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url(../static/images/ContactUs.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            h1 {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid #ddddddab;
+                text-align: left;
+                padding: 8px;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Contact Us / Feedback Data</h1>
+            <table>
+                <tr>
+                    <th>Your Name</th>
+                    <th>Your Email</th>
+                    <th>Your Phone Number</th>
+                    <th>Your City</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                </tr>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.name }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.phone }}</td>
+                    <td>{{ feedback.city }}</td>
+                    <td>{{ feedback.subject }}</td>
+                    <td>{{ feedback.message }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="home_page.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Include Navbar -->
+    <nav class="upper-navbar">
+        <div class="brand">
+            <a href="home_page.html">Blood Bank Management</a>
+        </div>
+        <button class="nav-toggle" onclick="toggleNav()">☰</button>
+        <ul class="nav-links" id="nav-links">
+           <a href="home_page.html">Home</a>
+           <a href="Doner.html">Donor</a>
+           <a href="patient.html">Patient</a>
+           <a href="Donation.html">Donations</a>
+           <a href="Blood_Request.html">Blood Request</a>
+           <a href="request-history.html">Request History</a>
+           <a href="index.html">Blood Stock</a>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to Blood Bank Management</h1>
+                <p>Helping to save lives through effective blood management and donation.</p>
+                <a href="Blood_Request.html" class="cta-button">Make a Blood Request</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <h2>Our Mission</h2>
+                <p>To ensure the availability of safe blood for those in need through efficient management and community engagement.</p>
+            </div>
+            <div class="feature">
+                <h2>How It Works</h2>
+                <p>Our platform connects donors, patients, and healthcare providers to streamline the blood donation process.</p>
+            </div>
+            <div class="feature">
+                <h2>Get Involved</h2>
+                <p>Join our community of donors and help make a difference. Sign up to become a donor or request blood when needed.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="home_page.js"></script>
+</body>
+</html>

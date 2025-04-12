@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-image: url('../static/images/Pulmonology.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #1a1a2e;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: all 0.4s ease-in-out;
+        padding-top: 20px;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .sidebar.collapsed {
+        width: 80px;
+      }
+
+      .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        font-size: 1.2rem;
+      }
+
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+
+      .sidebar-menu li {
+        padding: 15px 20px;
+        transition: background 0.3s ease-in-out;
+      }
+
+      .sidebar-menu li:hover {
+        background-color: #00c9a7;
+      }
+
+      .sidebar-menu a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 1rem;
+      }
+
+      .sidebar.collapsed .sidebar-menu a span {
+        display: none;
+      }
+
+      /* Main Content */
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.4s ease-in-out;
+      }
+
+      .sidebar.collapsed+.main-content {
+        margin-left: 80px;
+      }
+
+      h1 {
+        color: #007b7b;
+        margin-bottom: 10px;
+      }
+
+      /* Doctor Details Card */
+      .doctor-details-card {
+        background: rgba(255, 255, 255, 0.719);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        text-align: left;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+
+      .doctor-details-card h2 {
+        color: #007b7b;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .doctor-details-card p {
+        margin: 10px 0;
+        font-size: 1rem;
+      }
+
+      .doctor-details-card p strong {
+        color: #007b7b;
+      }
+
+      /* Stats Section */
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.768);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        min-width: 250px;
+      }
+
+      .stat-card h2 {
+        color: #007b7b;
+        margin-bottom: 10px;
+      }
+
+      /* Appointments */
+      .appointments {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+        justify-content: center;
+      }
+
+      .appointment-card {
+        background: rgba(255, 255, 255, 0.584);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
+
+      .appointment-card h3 {
+        color: #007b7b;
+        margin-bottom: 5px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 5px;
+        text-decoration: none;
+        color: white;
+        background: #007b7b;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .btn:hover {
+        background: #005f5f;
+      }
+
+      /* Chart Section */
+      .charts {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      canvas {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          margin-left: 80px;
+        }
+
+        .sidebar {
+          width: 80px;
+        }
+
+        .stats {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .appointments {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <div class="toggle-btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="#"><i class="fas fa-home"></i><span>Home</span></a></li>
+        <!-- <li><a href="/appointment"><i class="fas fa-calendar-check"></i><span>Appointment</span></a></li> -->
+        <li><a href="/bed_status"><i class="fas fa-procedures"></i><span>Bed Availability</span></a></li>
+        <!-- <li><a href="/feedback"><i class="fas fa-comment-alt"></i><span>Feedback</span></a></li> -->
+        <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
+            <i class="fas fa-bell"></i><span>Notifications</span>
+          </a></li> -->
+        <li><a href="/user_logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h1>Welcome to the Doctor Dashboard</h1>
+
+      <!-- Doctor Details Card -->
+      <div class="doctor-details-card">
+        <h2>Doctor Details</h2>
+        <p><strong>Name:</strong> {{ doctor.name }}</p>
+        <p><strong>Email:</strong> {{ doctor.email }}</p>
+        <p><strong>Phone Number:</strong> {{ doctor.phone }}</p>
+        <p><strong>Aadhar:</strong> {{ doctor.aadhar }}</p>
+        <p><strong>Hospital Name:</strong> {{ doctor.hospital_name }}</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <h2>Total Appointments</h2>
+          <p id="totalAppointments">{{ total_appointments }}</p>
+        </div>
+        <div class="stat-card">
+          <h2>Patients Checked</h2>
+          <p id="patientsChecked">{{ 30 }}</p>
+        </div>
+      </div>
+
+      <!-- Appointment Cards -->
+      <h2>Upcoming Appointments</h2>
+      <div class="appointments">
+        {% for contact in appointments %}
+        <div class="appointment-card" id="card-{{ contact.id }}">
+          <h3>{{ contact.name }}</h3>
+          <p>Email: {{ contact.email }}</p>
+          <p>Phone: {{ contact.number }}</p>
+          <p>Date: {{ contact.appointment_date }}</p>
+          <p>Time: {{ contact.time_slot }}</p>
+          <p>Department: {{ contact.speciality }}</p>
+          <p>Queue Number: {{ contact.queue_number }}</p>
+          <a class="btn" href="tel:{{ contact.number }}">Call</a>
+          <a class="btn" href="/video_call">Video Consult</a>
+          <button class="btn" onclick="downloadPDF('{{ contact.id }}')">Download PDF</button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("collapsed");
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+      function downloadPDF(cardId) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Get the appointment card content
+        const card = document.getElementById("card-" + cardId);
+        if (!card) {
+          alert("Error: Appointment details not found!");
+          return;
+        }
+
+        // Extract text from the card
+        const appointmentDetails = card.querySelectorAll("p, h3");
+        let content = "";
+
+        appointmentDetails.forEach((element) => {
+          content += element.innerText + "\n\n";
+        });
+
+        // Formatting PDF
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text("Appointment Details", 10, 20);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(content, 10, 40);
+
+        // Save the PDF
+        doc.save(`Appointment_${cardId}.pdf`);
+      }
+    </script>
+
+
+  </body>
+
+</html>

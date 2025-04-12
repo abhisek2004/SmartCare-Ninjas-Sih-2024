@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Feedback Data</title>
+        <style>
+            /* Import Google Font */
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+            /* body {
+                font-family: "Poppins", sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f9f9f9;
+            } */
+
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url(../static/images/medicine.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .navbar {
+                background-color: #00637f;
+                padding: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .navbar h2 {
+                color: white;
+                margin: 0;
+            }
+
+            .dashboard-btn {
+                background-color: #ffffffaa;
+                color: #00637f;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            .dashboard-btn:hover {
+                background-color: #f2f2f2;
+            }
+
+            .container {
+                width: 90%;
+                max-width: 1200px;
+                margin: 30px auto;
+                background: #ffffffa8;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                text-align: center;
+                color: #333;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                overflow: hidden;
+                border-radius: 8px;
+            }
+
+            th,
+            td {
+                border: 2px solid #dddddd;
+                text-align: left;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            th {
+                background-color: #00637f;
+                color: white;
+                font-weight: 600;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            tr:hover {
+                background-color: #d1ecf1;
+                transition: 0.3s ease-in-out;
+            }
+
+            .yes {
+                color: green;
+                font-weight: bold;
+            }
+
+            .no {
+                color: red;
+                font-weight: bold;
+            }
+
+            .resolve-btn {
+                background-color: #28a745;
+                color: white;
+                padding: 6px 10px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            .resolve-btn:hover {
+                background-color: #218838;
+            }
+
+            .resolution-message {
+                width: 100%;
+                padding: 6px;
+                margin-top: 5px;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+            }
+
+            @media (max-width: 768px) {
+                table {
+                    font-size: 14px;
+                }
+
+                th,
+                td {
+                    padding: 8px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <h2>Admin Feedback</h2>
+            <button class="dashboard-btn" onclick="window.location.href='/superadmin';">Return to Dashboard</button>
+        </div>
+
+        <div class="container">
+            <h1>Admin Feedback Data</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Hospital Name</th>
+                    <th>Email Address</th>
+                    <th>Phone No.</th>
+                    <th>Satisfied?</th>
+                    <th>Issue</th>
+                    <th>Solved?</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.name }}</td>
+                    <td>{{ feedback.hospital_name }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.phone }}</td>
+                    <td class="{{ 'yes' if feedback.satisfied == 'Yes' else 'no' }}">{{ feedback.satisfied }}</td>
+                    <td>{{ feedback.issue }}</td>
+                    <td>
+                        <select class="solved-status" data-email="{{ feedback.email }}">
+                            <option value="No" {% if feedback.solved == 'No' %}selected{% endif %}>No</option>
+                            <option value="Yes" {% if feedback.solved == 'Yes' %}selected{% endif %}>Yes</option>
+                        </select>
+                        <textarea class="resolution-message" placeholder="Enter resolution message..."
+                            data-email="{{ feedback.email }}"></textarea>
+                    </td>
+                    <td>
+                        <button class="resolve-btn" onclick="sendResolutionEmail(this)">Send</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <script>
+            function sendResolutionEmail(button) {
+                let row = button.closest("tr");
+                let email = row.querySelector(".solved-status").getAttribute("data-email");
+                let solvedStatus = row.querySelector(".solved-status").value;
+                let resolutionMessage = row.querySelector(".resolution-message").value;
+
+                if (solvedStatus === "No") {
+                    alert("Please mark the issue as solved before sending a resolution message.");
+                    return;
+                }
+
+                if (resolutionMessage.trim() === "") {
+                    alert("Please enter a resolution message.");
+                    return;
+                }
+                alert(`Resolution message sent to ${email}:\n\n${resolutionMessage}`);
+                row.querySelector(".resolution-message").value = "";
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            }
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Appointment Data</title>
+    <style>
+      /* Global Styles */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url(../static/images/registration.jpg) no-repeat center center/cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-attachment: fixed;
+      }
+
+      /* Title Styling */
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 2rem;
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      }
+
+      /* Card Container */
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 20px;
+      }
+
+      /* Individual Appointment Card */
+      .appointment-card {
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        padding: 20px;
+        width: 320px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+        color: #f8f8f8;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      /* Hover Effect */
+      .appointment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 6px 20px rgba(255, 255, 255, 0.3);
+      }
+
+      /* Card Header */
+      .appointment-card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: #00eaff;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 5px;
+      }
+
+      /* Card Details */
+      .appointment-card p {
+        margin: 8px 0;
+        font-size: 15px;
+        color: #f1f1f1;
+      }
+
+      /* Highlighting Important Data */
+      .highlight {
+        font-weight: bold;
+        color: #ffeb3b;
+      }
+
+      /* Status Badge */
+      .status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top: 10px;
+      }
+
+      .approved {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .rejected {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      .pending {
+        background-color: #ffc107;
+        color: black;
+      }
+
+      /* Buttons for Admin Actions */
+      .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+
+      .btn-approve,
+      .btn-reject {
+        padding: 8px 12px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .btn-approve {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .btn-reject {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      .btn-approve:hover {
+        background-color: #218838;
+      }
+
+      .btn-reject:hover {
+        background-color: #c82333;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .appointment-card {
+          width: 90%;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .appointment-card {
+          width: 100%;
+        }
+
+        h1 {
+          font-size: 1.4rem;
+        }
+      }
+
+      /* Container for Buttons */
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      /* Style for Admin Dashboard Button */
+      .btn-admin {
+        text-decoration: none;
+        background-color: #00637f;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        display: inline-block;
+      }
+
+      .btn-admin:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Admin Appointment Data</h1>
+
+    <div class="card-container">
+      {% for contact in appointments %}
+      <div class="appointment-card">
+        <h2>{{ contact.name }}</h2>
+        <p><span class="highlight">Email:</span> {{ contact.email }}</p>
+        <p><span class="highlight">Phone:</span> {{ contact.number }}</p>
+        <p><span class="highlight">Date:</span> {{ contact.appointment_date }}</p>
+        <p><span class="highlight">Time Slot:</span> {{ contact.time_slot }}</p>
+        <p><span class="highlight">Department:</span> {{ contact.speciality }}</p>
+        <p><span class="highlight">Description:</span> {{ contact.disease_description }}</p>
+        <p><span class="highlight">Queue Number:</span> {{ contact.queue_number }}</p>
+
+        <!-- Appointment Status -->
+        <!-- <p>Status: <span
+            class="status {% if contact.status == 'Approved' %}approved{% elif contact.status == 'Rejected' %}rejected{% else %}pending{% endif %}"
+            id="status-{{ contact.id }}">{{ contact.status }}</span></p> -->
+
+        <!-- Approve / Reject Buttons -->
+        <!-- <div class="action-buttons">
+          <button class="btn-approve" onclick="updateStatus('{{ contact.id }}', 'Approved')">Approve</button>
+          <button class="btn-reject" onclick="updateStatus('{{ contact.id }}', 'Rejected')">Reject</button>
+        </div> -->
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="button-container">
+      <a href="/admin" class="btn-admin">Return to Admin Dashboard</a>
+    </div>
+
+    <!-- JavaScript for Updating Status -->
+    <script>
+      function updateStatus(appointmentId, status) {
+        // Make an API call to update status in the backend
+        fetch(`/admin/update-status/${appointmentId}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: status })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Update the status in the UI
+              let statusElement = document.getElementById(`status-${appointmentId}`);
+              statusElement.textContent = status;
+              statusElement.className = `status ${status.toLowerCase()}`;
+            } else {
+              alert("Failed to update status");
+            }
+          })
+          .catch(error => console.error("Error updating status:", error));
+      }
+    </script>
+
+  </body>
+
+</html>

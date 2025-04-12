@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Patient</title>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-image: url("../static/images/Pulmonology.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 500px;
+        margin: 50px auto;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.85
+        ); /* Semi-transparent background */
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #ffffff90;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px); /* Blurs background behind the container */
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      label {
+        font-weight: bold;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="date"]:focus,
+      select:focus {
+        border-color: #00637f; /* Blue border on focus */
+        outline: none;
+      }
+
+      input[type="submit"],
+      .btn-appointment {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #00637f;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      input[type="submit"]:hover,
+      .btn-appointment:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+      }
+
+      .center-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container appointment">
+      <h2>Book Appointment</h2>
+      <form method="post" action="/appointment">
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+            pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+            title="Please enter a valid name. Only letters and spaces are allowed, and the name cannot consist of only spaces."
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            maxlength="13"
+            pattern="(\+91[-\s]?)?[6-9]{1}[0-9]{9}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="emailInput">Email Address</label>
+          <input
+            type="text"
+            id="emailInput"
+            placeholder="Enter Email Address"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="addressInput">Address</label>
+          <input
+            type="text"
+            id="addressInput"
+            placeholder="Enter Your Address"
+            name="Address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="dateInput">Appointment Date</label>
+          <input
+            type="date"
+            id="dateInput"
+            name="dat"
+            min="{{today}}"
+            max="{{mx_date}}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="hospital">Select Hospital</label>
+          <select id="hospital" name="hospital" required>
+            <option value="" disabled selected>Select Hospital</option>
+            <!-- Dynamic options -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="diseaseInput">Select Speciality</label>
+          <select id="diseaseInput" name="diseaseInput">
+            <option value="" disabled selected>Select an option</option>
+            <!-- Add more options here -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="diseaseDescription">Disease Description</label>
+          <input
+            type="text"
+            placeholder="Enter Disease Description"
+            name="diseaseDescription"
+          />
+        </div>
+        <div class="center-button-container">
+          <button class="btn-appointment" id="appointment" type="submit">
+            Book Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

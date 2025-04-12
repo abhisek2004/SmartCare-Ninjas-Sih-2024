@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-image: url("../static/images/Pulmonology.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* .navbar {
+        background-color: #00637f !important;
+        position: relative;
+      } */
+
+      .sidebar {
+        width: 250px;
+        background-color: #343a40d0;
+        position: fixed;
+        height: 100%;
+        color: #fff;
+        padding-top: 20px;
+        overflow-y: auto;
+        transition: width 0.3s;
+      }
+
+      .sidebar.collapsed {
+        width: 60px;
+      }
+
+      .sidebar .toggle-btn {
+        cursor: pointer;
+        text-align: center;
+        padding: 15px;
+        background-color: #00637f;
+        color: white;
+        font-size: 20px;
+      }
+
+      .sidebar a {
+        padding: 15px;
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        background-color: #575757;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.3s;
+      }
+
+      .main-content.collapsed {
+        margin-left: 60px;
+      }
+
+      h2 {
+        background-color: rgba(0, 99, 127, 0.7);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        background-color: #ffffff90;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .chart-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        /* height: 500px; */
+        text-align: center;
+      }
+
+      .chart-row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .chart-row .chart-container {
+        width: 48%;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+
+        .chart-row {
+          flex-direction: column;
+        }
+
+        .chart-row .chart-container {
+          width: 100%;
+        }
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background-color: #1a1a2e;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: all 0.3s ease;
+        padding-top: 20px;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .sidebar.collapsed {
+        width: 80px;
+      }
+
+      .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        font-size: 1.2rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+      }
+
+      .logo i {
+        font-size: 1.5rem;
+        color: #00c9a7;
+      }
+
+      .logo-text {
+        transition: opacity 0.3s;
+      }
+
+      .sidebar.collapsed .logo-text {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .toggle-btn {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+
+      .sidebar-menu li {
+        padding: 15px 20px;
+        transition: background 0.3s;
+      }
+
+      .sidebar-menu li:hover {
+        background-color: #00c9a7;
+      }
+
+      .sidebar-menu a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 1rem;
+      }
+
+      .sidebar-menu a i {
+        font-size: 1.2rem;
+        transition: margin-right 0.3s;
+      }
+
+      .sidebar.collapsed .sidebar-menu a span {
+        display: none;
+      }
+
+      .sidebar.collapsed .sidebar-menu a i {
+        margin-right: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-hospital"></i>
+          <!-- <span class="logo-text">Admin Panel</span> -->
+        </div>
+        <div class="toggle-btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a href="/admin_settings"><i class="fas fa-gear"></i><span>Setting</span></a>
+        </li>
+        <!-- <li>
+          <a href="/admin_appointment"
+            ><i class="fas fa-user-plus"></i><span>Book Apt.</span></a
+          >
+        </li> -->
+        <li>
+          <a href="/add_patient"><i class="fas fa-user-plus"></i><span>Add Patient</span></a>
+        </li>
+        <li>
+          <a href="/add_doc"><i class="fas fa-user-md"></i><span>Add Doctor</span></a>
+        </li>
+        <li>
+          <a href="/admin/discharge"><i class="fas fa-procedures"></i><span>Discharge</span></a>
+        </li>
+        <li>
+          <a href="/admin/manage_appointment"><i class="fas fa-calendar-check"></i><span>Apt. Data</span></a>
+        </li>
+        <!-- <li>
+          <a href="/admin_feedback"
+            ><i class="fas fa-comments"></i><span>Feedback</span></a
+          >
+        </li> -->
+        <li>
+          <a href="/admin_logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </li>
+      </ul>
+      <script>
+        function toggleSidebar() {
+          document.querySelector(".sidebar").classList.toggle("collapsed");
+        }
+      </script>
+    </div>
+
+    <div class="main-content">
+      <h2>Admin Dashboard {{hospital_name}}</h2>
+
+      <style>
+        .dashboard-card {
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s, box-shadow 0.3s;
+          height: 100%;
+          overflow: hidden;
+          padding: 20px;
+          text-align: center;
+          color: white;
+        }
+
+        .dashboard-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+          font-size: 2.5rem;
+          margin-bottom: 10px;
+        }
+
+        .card-title {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+
+        .card-value {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
+        }
+
+        /* Color Variations */
+        .bg-primary {
+          background-color: #007bff;
+        }
+
+        .bg-warning {
+          background-color: #ffc107;
+        }
+
+        .bg-success {
+          background-color: #28a745;
+        }
+
+        .bg-danger {
+          background-color: #dc3545;
+        }
+
+        .bg-info {
+          background-color: #17a2b8;
+        }
+
+        .bg-dark {
+          background-color: #343a40;
+        }
+      </style>
+
+      <div class="grid-container">
+        <div class="dashboard-card bg-primary">
+          <i class="fas fa-calendar-check card-icon"></i>
+          <div class="card-title">Total Appointments</div>
+          <div class="card-value">{{count}}</div>
+        </div>
+        <div class="dashboard-card bg-warning">
+          <i class="fas fa-user-md card-icon"></i>
+          <div class="card-title">Doctors</div>
+          <div class="card-value">{{doc}}</div>
+        </div>
+        <div class="dashboard-card bg-success">
+          <i class="fas fa-procedures card-icon"></i>
+          <div class="card-title">Total Patients</div>
+          <div class="card-value">{{patient}}</div>
+        </div>
+        <div class="dashboard-card bg-info">
+          <i class="fas fa-bed card-icon"></i>
+          <div class="card-title">General Beds</div>
+          <div class="card-value">{{vacent_general}}/{{general_total}}</div>
+        </div>
+        <div class="dashboard-card bg-dark">
+          <i class="fas fa-procedures card-icon"></i>
+          <div class="card-title">ICU Beds</div>
+          <div class="card-value">{{vacent_icu}}/{{icu_total}}</div>
+        </div>
+        <div class="dashboard-card bg-danger">
+          <i class="fas fa-lungs card-icon"></i>
+          <div class="card-title">Ventilators</div>
+          <div class="card-value">
+            {{vacent_ventilator}}/{{vantilator_total}}
+          </div>
+        </div>
+      </div>
+
+      <!-- FontAwesome for icons -->
+      <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+      <!-- Bar Chart -->
+      <div class="chart-container">
+        <canvas id="hospitalBarChart"></canvas>
+      </div>
+      <br />
+      <!-- Doughnut Charts Side by Side -->
+      <div class="chart-row">
+        <div class="chart-container">
+          <h4 class="text-center">Occupied Resources</h4>
+          <canvas id="hospitalDoughnutChartFilled"></canvas>
+        </div>
+        <div class="chart-container">
+          <h4 class="text-center">Available Resources</h4>
+          <canvas id="hospitalDoughnutChartAvailable"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        var sidebar = document.querySelector(".sidebar");
+        var mainContent = document.querySelector(".main-content");
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("collapsed");
+      }
+
+      // Bar Chart
+      new Chart(document.getElementById('hospitalBarChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ["Appointments", "Doctors", "Patients", "General Beds", "ICU Beds", "Ventilators"],
+          datasets: [{
+            label: 'Hospital Stats',
+            data: [{{ count }}, {{ doc }}, {{ patient }}, {{ general_total }}, {{ icu_total }}, {{ vantilator_total }}],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"]
+                }]
+            }
+        });
+
+      // Doughnut Chart - Filled Resources
+      new Chart(document.getElementById('hospitalDoughnutChartFilled').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ["Occupied General Beds", "Occupied ICU Beds", "Occupied Ventilators"],
+          datasets: [{
+            data: [{{ general_total - vacent_general }}, {{ icu_total - vacent_icu }}, {{ vantilator_total - vacent_ventilator }}],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+                }]
+            }
+        });
+
+      // Doughnut Chart - Available Resources
+      new Chart(document.getElementById('hospitalDoughnutChartAvailable').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ["Available General Beds", "Available ICU Beds", "Available Ventilators"],
+          datasets: [{
+            data: [{{ vacent_general }}, {{ vacent_icu }}, {{ vacent_ventilator }}],
+        backgroundColor: ["#4BC0C0", "#9966FF", "#FF9F40"]
+                }]
+            }
+        });
+    </script>
+  </body>
+
+</html>

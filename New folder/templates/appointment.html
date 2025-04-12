@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/appointment.css" />
+    <style>
+      body {
+        background-image: url("../static/images/appintment\ \(2\).jpg");
+        /* background-size: cover; */
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: "Roboto", sans-serif;
+        color: #333;
+      }
+
+      .navbar {
+        background-color: #00637f !important;
+      }
+
+      .navbar-brand img {
+        border-radius: 50%;
+      }
+
+      .navbar h3 {
+        color: white;
+      }
+
+      .form-data {
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.505);
+        border: 2px solid transparent;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 50px;
+      }
+
+      .form-data:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-color: #00637f;
+      }
+
+      .form-head {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .form-head h2 {
+        color: #00637f;
+        font-weight: bold;
+      }
+
+      .form-body {
+        padding: 20px;
+      }
+
+      .form-label {
+        font-weight: bold;
+        color: #00637f;
+      }
+
+      .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .form-control:focus {
+        border-color: #00637f;
+        box-shadow: 0 0 5px rgba(0, 99, 127, 0.5);
+      }
+
+      .btn-appointment {
+        background-color: #00637f;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-appointment:hover {
+        background-color: #004f5f;
+      }
+
+      .alert-danger {
+        background-color: rgba(255, 0, 0, 0.1);
+        border: 1px solid rgba(255, 0, 0, 0.2);
+        color: #ff0000;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+
+      #dateInput::-webkit-calendar-picker-indicator {
+        color: transparent;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="header">
+      <nav
+        class="navbar navbar-expand-lg sticky-navbar"
+        style="background-color: #00637f"
+        data-bs-theme="dark"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="../static/images/delhi.png"
+              alt="Delhi Logo"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </a>
+          <!-- <h3 class="mehran">Government of NCT of Delhi</h3> -->
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav ms-auto justify-content-end navbar1">
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/user_app"
+                  >User Dashboard</a
+                >
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-light" href="/user_logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Appointment Form -->
+    <div class="container appointment">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="alert alert-danger">
+        {% for category, message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-data">
+            <div class="form-head">
+              <h2>Book Appointment</h2>
+            </div>
+            <form method="post" action="/appointment">
+              <div class="form-body">
+                <!-- Full Name Input -->
+                <div class="mb-3">
+                  <label for="nameInput" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="Enter Full Name"
+                    name="name"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Mobile Number Input -->
+                <div class="mb-3">
+                  <label for="numberInput" class="form-label"
+                    >Mobile Number</label
+                  >
+                  <input
+                    type="text"
+                    id="numberInput"
+                    placeholder="Enter Mobile Number"
+                    name="number"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Email Address Input -->
+                <div class="mb-3">
+                  <label for="emailInput" class="form-label"
+                    >Email Address</label
+                  >
+                  <input
+                    type="text"
+                    id="emailInput"
+                    placeholder="Enter Email Address"
+                    name="email"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Address Input -->
+                <div class="mb-3">
+                  <label for="addressInput" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    id="addressInput"
+                    placeholder="Enter Your Address"
+                    name="Address"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Appointment Date Input -->
+                <div class="mb-3">
+                  <label for="dateInput" class="form-label"
+                    >Appointment Date</label
+                  >
+                  <input
+                    type="date"
+                    id="dateInput"
+                    name="dat"
+                    min="{{ today }}"
+                    max="{{ max_date }}"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Time Slot Selection -->
+                <div class="mb-3">
+                  <label for="timeSlot">Select Time Slot:</label>
+                  <select id="timeSlot" name="timeSlot" class="form-control">
+                    <option value="" disabled selected>
+                      Select a time slot
+                    </option>
+                    <option value="08:00 - 09:00">08:00 - 09:00</option>
+                    <option value="09:00 - 10:00">09:00 - 10:00</option>
+                    <option value="10:00 - 11:00">10:00 - 11:00</option>
+                    <option value="11:00 - 12:00">11:00 - 12:00</option>
+                    <option value="12:00 - 13:00">12:00 - 13:00</option>
+                    <option value="12:00 - 13:00">13:00 - 14:00</option>
+                    <option value="12:00 - 13:00">14:00 - 15:00</option>
+                    <option value="12:00 - 13:00">15:00 - 16:00</option>
+                    <option value="12:00 - 13:00">16:00 - 17:00</option>
+                    <!-- Other time slots... -->
+                  </select>
+                </div>
+                <!-- Hospital Selection with Dynamic Doctor Update -->
+                <div class="form-group">
+                  <label for="hospital" class="form-label"
+                    >Select Hospital</label
+                  >
+                  <select
+                    id="hospital"
+                    name="hospital"
+                    class="form-control"
+                    required
+                  >
+                    <option value="" disabled selected>Select Hospital</option>
+                    {% for hospital in hospitals %}
+                    <option value="{{ hospital }}">{{ hospital }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <br />
+                <!-- Speciality Selection -->
+                <div class="mb-3">
+                  <label for="specialization">Select Specialization:</label>
+                  <select
+                    id="specialization"
+                    name="specialization"
+                    class="form-control"
+                  >
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Medicine">Medicine</option>
+                    <option value="Orthopedic">Orthopedic</option>
+                    <option value="Mental_health">Mental Health</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Gastroenterology">Gastroenterology</option>
+                    <option value="Endocrinology">Endocrinology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Ophthalmology">Ophthalmology</option>
+                    <option value="Otolaryngology">Otolaryngology (ENT)</option>
+                    <option value="Pulmonology">Pulmonology</option>
+                    <option value="Urology">Urology</option>
+                    <option value="Nephrology">Nephrology</option>
+                    <option value="Radiology">Radiology</option>
+                    <option value="Pathology">Pathology</option>
+                    <option value="Surgery">Surgery</option>
+                    <option value="Plastic_Surgery">Plastic Surgery</option>
+                    <option value="Emergency_Medicine">
+                      Emergency Medicine
+                    </option>
+                    <option value="Infectious_Diseases">
+                      Infectious Diseases
+                    </option>
+                    <option value="Hematology">Hematology</option>
+                    <!-- Add more specialties if needed -->
+                  </select>
+                </div>
+                <!-- Doctor Selection based on Hospital and Speciality -->
+                <div class="form-group">
+                  <label for="doctor" class="form-label">Select Doctor</label>
+                  <select id="doctor" name="doctor" class="form-control">
+                    <option value="" disabled selected>Select Doctor</option>
+                    {% for doctor in doctors %}
+                    <option value="{{ doctor }}">{{ doctor }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <br />
+                <!-- Disease Description -->
+                <div class="mb-3">
+                  <label for="diseaseDescription">Description Disease:</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Disease Description"
+                    name="diseaseDescription"
+                    class="form-control"
+                  />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mb-3 d-flex justify-content-center">
+                  <button class="btn btn-success btn-appointment" type="submit">
+                    Book Appointment
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery for Dynamic Specialization and Doctor Selection -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      function fetchSpecializations() {
+        const hospitalName = document.getElementById("hospital").value;
+        const specializationSelect = document.getElementById("specialization");
+
+        // Clear previous options
+        specializationSelect.innerHTML =
+          '<option value="">-- Select a Specialization --</option>';
+
+        if (hospitalName) {
+          fetch(
+            `/get_specializations?hospital_name=${encodeURIComponent(
+              hospitalName
+            )}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.specializations && data.specializations.length > 0) {
+                data.specializations.forEach((specialization) => {
+                  const option = document.createElement("option");
+                  option.value = specialization;
+                  option.textContent = specialization;
+                  specializationSelect.appendChild(option);
+                });
+              } else {
+                alert("No specializations found for this hospital.");
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        }
+      }
+
+      function fetchDoctors() {
+        const hospital = $("#hospital").val();
+        const specialization = $("#specialization").val();
+
+        if (hospital && specialization) {
+          $.ajax({
+            url: `/get_doctors/${hospital}/${specialization}`, // API call to fetch doctors based on hospital and specialization
+            method: "GET",
+            success: function (data) {
+              const doctorSelect = $("#doctor");
+              doctorSelect.empty();
+              doctorSelect.append(
+                '<option value="" disabled selected>Select Doctor</option>'
+              );
+              if (data.doctors && data.doctors.length > 0) {
+                data.doctors.forEach((doctor) => {
+                  doctorSelect.append(
+                    `<option value="${doctor}">${doctor}</option>`
+                  );
+                });
+              } else {
+                alert("No doctors found for this specialization.");
+              }
+            },
+            error: function () {
+              alert("Error fetching doctors. Please try again.");
+            },
+          });
+        }
+      }
+
+      // Fetch specializations when hospital is changed
+      $("#hospital").on("change", fetchSpecializations);
+
+      // Fetch doctors when specialization is changed
+      $("#specialization").on("change", fetchDoctors);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+body {
+  font-family: "Helvetica, Arial, sans-serif";
+  margin: 0;
+  background-color: #A0DEFF;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.header h3{
+  font-size: 22px;
+  font-weight: bold;
+  
+}
+.header .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  margin-top: -12px;
+  color: black;
+  font-weight: bold;
+}
+.header .logo h4{
+  font-size: 12px;
+}
+
+.carousel h3{
+  font-size: 37px;
+  font-weight: bold;
+}
+.carousel p{
+  font-size: 22px;
+}
+/* .carousel button{
+  background-color: #011e2c;
+} */
+
+.carousel img{
+    height: 620px
+}
+.navbar1{
+    margin: 0 50px 0 40px;
+}
+.navbar-nav .nav-item a {
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+.carousel-caption h3{
+    margin-top: -249px;
+}
+.mehran {
+    margin: 0 20px 0 60px;
+    color: #fff;
+    font-size: 23px;
+}
+/* about us section satrt  */
+
+.about h2{
+  text-align: center;
+  padding: 95px 0px 18px 0px;
+  text-transform: uppercase; 
+  font-size: 32px;
+  font-weight: bold;
+}
+.about h3{
+  text-align: center;
+  padding: 20px 0 10px 0;
+  font-size: 21px;
+  font-weight: bold;
+  text-transform: uppercase; 
+}
+  .column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+  }
+  
+  .about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+  
+  .button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #555;
+  }
+  .btn-group a{
+    color: #fff;
+    text-decoration: none;
+  }
+  
+/* about section end  */
+/* .doctors section  */
+
+.doctors{
+	width: 100%;
+	height: 100%;
+	padding: 50px;
+  background: linear-gradient(140deg, #2c3e50 52%, #fff 0);
+  /* background: linear-gradient(220deg, #0c3742 52%, #fff 0% ); */
+  padding: 50px 0;
+}
+.doctors h1 {
+  font-size: 34px;
+  color: #100000;
+  font-weight: bold;
+  text-transform: uppercase; 
+  padding: 14px 0;
+  margin-top: 37px;
+
+}
+.doctors p {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+
+.money{
+	font-size: 40px;
+	line-height: 1;
+	color: #606060;
+}
+.card{
+	transition: 0.4s case;
+}
+.card-header{
+	font-size: 1,6rem;
+	font-weight: bold;
+	background: #fff;
+	padding: 25px 0!important;
+}
+.card-body{
+	padding: 30px 20px!important;
+
+}
+.card-body h4{
+  text-align: center;
+  text-transform: uppercase; 
+  font-size: 18px;
+  font-weight: bold;
+}
+.card-body p{
+  font-size: 16px;
+  text-align: center;
+}
+.card-body li{
+	margin: 10px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: #606060;
+}
+.card-footer{
+	/* background: #f3fafc 52%!important; */
+	padding: 30px 0px;
+}
+.card-footer a{
+ 	border: 1px solid #2c3e50;
+ 	border-radius: 100px;
+ 	margin: 0 5px;
+ 	padding: 12px 35px;
+ 	color:#2c3e50;
+ 	font-weight: 1rem;
+ 	font-weight: 400;
+  text-decoration: none;
+ 	outline: none;
+
+ }
+ .card-footer p{
+  color: #000;
+  font-size: 14px;
+ }
+ .card-footer a:hover
+ {
+ 	background: #218c74;
+ 	text-decoration: none;
+  border: none;
+ 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+
+ }
+ .card:hover .card-footer a{
+ 	color: #fff;
+ 	background: #218c74;
+ 	text-decoration: none;
+ 	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+ }
+ .card:hover{
+ 	transform: translateY(-20);
+ 	box-shadow:  0 0 20px 0 rgba(0, 0, 0, 0.4) ;
+ }
+  /*<!-------Doctor end----->*/
+ 
+
+  /*<!-- Contact_US function Start -->*/
+.contacUs{
+	width: 100%;
+	height: 100vh;
+	padding: 80px 0;
+  border-top: 7px solid black;
+	position: relative;
+}
+.contacUs p span{
+  color: #fff;
+}
+.contacUs:Before{
+	content: " ";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #5AB2FF;
+	z-index: -1;
+}
+/* .white-border-button {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+} */
+.contacUs .com{
+  color:#fff;
+  background: #2c3e50;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.contacUs .com:hover{
+  color:#fff;
+  background: #099ae3;
+}
+.form-button
+{
+ 	border: 1px solid #50d1c0;
+ 	border-radius: 100px;
+ 	margin: 0 5px;
+ 	padding: 12px 35px;
+ 	color:#50d1c0;
+ 	font-weight: 1rem;
+ 	font-weight: 400;
+ 	outline: none;
+ 	background: transparent;
+
+ }
+
+ .form-button:hover{
+ 	background:#70c5f3;
+ 	color: #50d1c0;
+ 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+ }
+ .form-control {
+  background-color: #f0f0f0; 
+  border: 1px solid #ccc; 
+}
+.form-control::placeholder {
+  padding: 10px;
+}
+.form-button:hover {
+  background: #70c5f3;
+  color: #50d1c0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/*<!-- Contact_US function End -->*/
+
+/* FOOTER  */
+.footer{
+  margin-top: -24px;
+  border-top: 5px solid rgb(0, 2, 6);
+  font-size: 16px;
+  
+}
+.footersectiion{
+	width: 100%;
+	height: auto;
+	padding: 70px 0 20px 0!important;
+	background: #2c3e50;
+	position: relative;
+}
+.footer_div p{
+	color: #fff;
+	font-size: 16px;
+}
+.footer_div li a{
+	font-size: 0.9rem;
+	line-height: 1.6;
+	font-weight: 400px;
+	color: #fff;
+	text-transform: capitalize;
+	text-align: center;
+	list-style: none;
+	text-decoration: none;
+
+}
+.footer_div h3{
+	text-transform: uppercase;
+	color: #fff;
+	margin-bottom:25px;
+	font-size: 1.2rem!important;
+	font-weight: 600px;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+.footer .row{
+  margin: 10px 0 22px 0;
+  border: 1px solid #fff;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+.sticky-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #333; /* Change the background color when sticky */
+}
+.sticky-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #333;
+  transition: background-color 0.3s ease; /* Add a transition for smooth effect */
+}
+.navbar-nav ms-auto justify-content-end navbar1{
+  color: white;
+}

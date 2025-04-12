@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Testimonial Carousel</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Bootstrap CSS -->
+        <link href="../static/css/testemonals_bootstrap.min.css" rel="stylesheet">
+
+        <!-- Owl Carousel CSS -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+        <style>
+            .testimonial-carousel .owl-nav {
+                display: none;
+            }
+
+            .testimonial-carousel .owl-dots {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .testimonial-carousel .owl-dot {
+                display: inline-block;
+                margin: 0 5px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #ddd;
+                transition: all 0.3s ease;
+            }
+
+            .testimonial-carousel .owl-dot.active {
+                background: #0d6efd;
+            }
+
+            .testimonial-item {
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Testimonial</h5>
+                    <h1 class="display-4">Patients Say About Our Services</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="owl-carousel testimonial-carousel">
+                            <div class="testimonial-item text-center">
+                                <div class="position-relative mb-5">
+                                    <img class="img-fluid rounded-circle mx-auto"
+                                        src="../static/images/testimonial-1.jpg" alt="">
+                                    <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                        style="width: 60px; height: 60px;">
+                                        <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                    </div>
+                                </div>
+                                <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd
+                                    labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor
+                                    diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                <hr class="w-25 mx-auto">
+                                <h3>Patient Name</h3>
+                                <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                            </div>
+                            <div class="testimonial-item text-center">
+                                <div class="position-relative mb-5">
+                                    <img class="img-fluid rounded-circle mx-auto"
+                                        src="../static/images/testimonial-2.jpg" alt="">
+                                    <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                        style="width: 60px; height: 60px;">
+                                        <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                    </div>
+                                </div>
+                                <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd
+                                    labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor
+                                    diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                <hr class="w-25 mx-auto">
+                                <h3>Patient Name</h3>
+                                <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                            </div>
+                            <div class="testimonial-item text-center">
+                                <div class="position-relative mb-5">
+                                    <img class="img-fluid rounded-circle mx-auto"
+                                        src="../static/images/testimonial-3.jpg" alt="">
+                                    <div class="position-absolute top-100 start-50 translate-middle d-flex align-items-center justify-content-center bg-white rounded-circle"
+                                        style="width: 60px; height: 60px;">
+                                        <i class="fa fa-quote-left fa-2x text-primary"></i>
+                                    </div>
+                                </div>
+                                <p class="fs-4 fw-normal">Dolores sed duo clita tempor justo dolor et stet lorem kasd
+                                    labore dolore lorem ipsum. At lorem lorem magna ut et, nonumy et labore et tempor
+                                    diam tempor erat. Erat dolor rebum sit ipsum.</p>
+                                <hr class="w-25 mx-auto">
+                                <h3>Patient Name</h3>
+                                <h6 class="fw-normal text-primary mb-3">Profession</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $(".testimonial-carousel").owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: false,
+                    autoplay: true, // Auto-scroll enabled
+                    autoplayTimeout: 5000, // 5 seconds delay between slides
+                    autoplayHoverPause: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 1
+                        },
+                        1000: {
+                            items: 1
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

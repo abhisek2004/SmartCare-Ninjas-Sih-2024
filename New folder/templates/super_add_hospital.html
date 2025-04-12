@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Hospital</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style>
+      /* body {
+        font-family: Arial, sans-serif;
+        background-color: #fff3c7;
+
+        margin: 0;
+        padding: 0;
+      }
+       */
+      body {
+        font-family: Arial, sans-serif;
+        background: url('../static/images/super_admin_hospital_reg.jpg') no-repeat center center fixed, #fff3c7;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        background-color: #00637f !important;
+        padding: 10px;
+        color: white;
+      }
+
+      .navbar-brand img {
+        border-radius: 50%;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #343a40;
+        position: fixed;
+        height: 100%;
+        color: #fff;
+        padding-top: 20px;
+        overflow-y: auto;
+      }
+
+      .sidebar a {
+        padding: 15px;
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        background-color: #575757;
+      }
+
+      .main-content {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 70px);
+        /* Adjusting for navbar height */
+
+        /* Centering in the middle */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        /* Adjust width as needed */
+        text-align: center;
+        /* Center the text inside */
+      }
+
+
+      .card {
+        background-color: #fff8e357;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        text-align: center;
+        width: 70%;
+        /* Set card width to 70% of the available space */
+        max-width: 1000px;
+        /* Optional: Set a maximum width for larger screens */
+      }
+
+      .card h3 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .card form {
+        text-align: left;
+        margin-top: 20px;
+      }
+
+      .card label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      .card input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .card button {
+        background-color: #00637f;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-right: 5px;
+        /* Optional: Add some space between buttons */
+      }
+
+      .card button:hover {
+        background-color: #004d66;
+      }
+
+      .footer {
+        background-color: #00637f;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 250px);
+        margin-left: 250px;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .footer {
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">
+        <img src="../static/images/delhi.png" alt="Delhi Logo" class="rounded-circle" width="40" height="40" />
+      </a>
+      <!-- <h3 class="text-light">Government of NCT of Delhi</h3> -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Keeping the navbar items if any -->
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="card">
+        <h3>Add New Hospital</h3>
+        <form method="POST" action="/superadmin/addHospital" id="hospitalForm">
+          <label for="hospitalName">Hospital Name:</label>
+          <input type="text" id="hospitalName" name="hospitalName" required pattern="^[A-Za-z\s]{3,50}$"
+            title="Hospital name should be between 3 to 50 characters and only contain letters and spaces." /><br />
+
+          <label for="hospitalmail">Hospital Email ID:</label>
+          <input type="email" id="hospitalmail" name="hospitalmail" required /><br />
+
+          <label for="hospitalpass">Password:</label>
+          <div style="position: relative; display: inline-block; width: 100%;">
+            <input type="password" id="hospitalpass" name="hospitalpass" required pattern=".{8,}"
+              title="Password should be at least 8 characters long." style="width: 100%; padding-right: 40px;">
+            <i id="togglePassword" class="fa fa-eye"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+          </div>
+
+          <script>
+            document.getElementById('togglePassword').addEventListener('click', function () {
+              var passwordField = document.getElementById('hospitalpass');
+              var icon = this;
+              if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+              } else {
+                passwordField.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+              }
+            });
+          </script>
+
+          <!-- Include FontAwesome for icons -->
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+          <!-- Button container -->
+          <div style="text-align: center; margin-top: 10px">
+            <button type="submit" style="
+                background-color: #00637f;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+              ">
+              Add Hospital
+            </button>
+            <button type="button" onclick="window.location.href='/superadmin';" style="
+                background-color: #00637f;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 10px;
+              ">
+              Return to Dashboard
+            </button>
+          </div>
+        </form>
+        <p id="hospital-message"></p>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Status</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Poppins", sans-serif;
+        background: url(../static/images/hospital.jpg) no-repeat center center/cover;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        backdrop-filter: blur(5px);
+      }
+
+      /* Container */
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Card Component */
+      .card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        margin-bottom: 20px;
+        padding: 20px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .card h3 {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+        color: #007bff;
+        font-weight: 600;
+      }
+
+      .card p {
+        margin: 10px 0;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      /* Links */
+      .card a {
+        color: #007bff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+      }
+
+      .card a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Button Styles */
+      button {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background 0.3s ease-in-out, transform 0.2s;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #0056b3, #003f7f);
+        transform: scale(1.05);
+      }
+
+      /* Form Styles */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 500px;
+        margin: auto;
+      }
+
+      label {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1rem;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="url"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease-in-out, box-shadow 0.3s;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="url"]:focus,
+      input[type="number"]:focus,
+      select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        outline: none;
+      }
+
+      /* Status Messages */
+      .status-message {
+        color: green;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .error {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      /* Headings */
+      h3 {
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 8px;
+        margin-bottom: 18px;
+        font-weight: bold;
+      }
+
+      /* Strong Typography */
+      strong {
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .container {
+          width: 95%;
+        }
+
+        .card {
+          padding: 18px;
+        }
+
+        .card h3 {
+          font-size: 1.5em;
+        }
+
+        button {
+          padding: 10px 15px;
+          font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="number"],
+        select {
+          font-size: 0.95em;
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 100%;
+          padding: 15px;
+        }
+
+        .card {
+          margin-bottom: 15px;
+        }
+
+        button {
+          padding: 8px 12px;
+          font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="number"],
+        select {
+          font-size: 0.9em;
+          padding: 8px;
+        }
+      }
+
+      /* Smooth Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: #f4f4f9;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #0056b3, #003f7f);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      {% if data %}
+      <div class="card">
+        <h3>{{ data.hospital_name }}</h3>
+
+        <p><strong>ID:</strong> {{ data.hospital_id }}</p>
+
+        <label>Hospital Name:</label>
+        <input type="text" class="editable" name="hospital_name" data-key="hospital_name"
+          value="{{ data.hospital_name }}">
+
+        <label>Address:</label>
+        <input type="text" class="editable" name="address" data-key="address"
+          value="{{ data.address_line1 }}, {{ data.city }}, {{ data.state }} - {{ data.postal_code }}">
+
+        <label>Contact Number:</label>
+        <input type="text" class="editable" name="contact_number" data-key="contact_number"
+          value="{{ data.contact_number }}">
+
+        <label>Emergency Contact:</label>
+        <input type="text" class="editable" name="emergency_contact_number" data-key="emergency_contact_number"
+          value="{{ data.emergency_contact_number }}">
+
+        <label>Email:</label>
+        <input type="email" class="editable" name="email_address" data-key="email_address"
+          value="{{ data.email_address }}">
+
+        <label>Website:</label>
+        <input type="url" class="editable" name="website_url" data-key="website_url" value="{{ data.website_url }}">
+
+        <label>Number of Beds:</label>
+        <input type="number" class="editable" name="number_of_general_beds" data-key="number_of_general_beds"
+          value="{{ data.number_of_general_beds }}">
+
+        <label>General Beds Occupied:</label>
+        <input type="number" class="editable" name="occupied_general" data-key="occupied_general"
+          value="{{ data.occupied_general }}">
+
+        <label>ICU Beds:</label>
+        <input type="number" class="editable" name="number_of_icu_beds" data-key="number_of_icu_beds"
+          value="{{ data.number_of_icu_beds }}">
+
+        <label>ICU Beds Occupied:</label>
+        <input type="number" class="editable" name="occupied_icu" data-key="occupied_icu"
+          value="{{ data.occupied_icu }}">
+
+        <label>Ventilators:</label>
+        <input type="number" class="editable" name="number_of_ventilators" data-key="number_of_ventilators"
+          value="{{ data.number_of_ventilators }}">
+
+        <label>Ventilator Beds Occupied:</label>
+        <input type="number" class="editable" name="occupied_ventilator" data-key="occupied_ventilator"
+          value="{{ data.occupied_ventilator }}">
+
+        <label>Emergency Department:</label>
+        <select class="editable" name="emergency_department" data-key="emergency_department">
+          <option value="Yes" {% if data.emergency_department == 'Yes' %}selected{% endif %}>Yes</option>
+          <option value="No" {% if data.emergency_department == 'No' %}selected{% endif %}>No</option>
+        </select>
+
+        <label>Specialization:</label>
+        <input type="text" class="editable" name="specialization" data-key="specialization"
+          value="{{ data.specialization }}">
+
+        <label>Operating Hours:</label>
+        <input type="text" class="editable" name="hospital_operating_hours" data-key="hospital_operating_hours"
+          value="{{ data.hospital_operating_hours }}">
+
+        <label>Visiting Hours:</label>
+        <input type="text" class="editable" name="visiting_hours" data-key="visiting_hours"
+          value="{{ data.visiting_hours }}">
+
+        <label>Pharmacy On-site:</label>
+        <select class="editable" name="pharmacy_on_site" data-key="pharmacy_on_site">
+          <option value="Yes" {% if data.pharmacy_on_site == 'Yes' %}selected{% endif %}>Yes</option>
+          <option value="No" {% if data.pharmacy_on_site == 'No' %}selected{% endif %}>No</option>
+        </select>
+
+        <label>Total Doctors:</label>
+        <input type="number" class="editable" name="total_doctors" data-key="total_doctors" value="{{ no_doc }}">
+
+        <label>Total Nurses:</label>
+        <input type="number" class="editable" name="total_number_of_nurses" data-key="total_number_of_nurses"
+          value="{{ data.total_number_of_nurses }}">
+
+        <label>Administrative Staff:</label>
+        <input type="number" class="editable" name="administrative_staff_count" data-key="administrative_staff_count"
+          value="{{ data.administrative_staff_count }}">
+
+        <label>Total Inventory Distributors:</label>
+        <input type="number" class="editable" name="inventory_distributors" data-key="inventory_distributors"
+          value="{{ data.inventory_distributors }}">
+
+        <label>Ambulance Services:</label>
+        <select class="editable" name="ambulance_services" data-key="ambulance_services">
+          <option value="Yes" {% if data.ambulance_services == 'Yes' %}selected{% endif %}>Yes</option>
+          <option value="No" {% if data.ambulance_services == 'No' %}selected{% endif %}>No</option>
+        </select>
+
+        <label>Blood Bank:</label>
+        <select class="editable" name="blood_bank" data-key="blood_bank">
+          <option value="Yes" {% if data.blood_bank == 'Yes' %}selected{% endif %}>Yes</option>
+          <option value="No" {% if data.blood_bank == 'No' %}selected{% endif %}>No</option>
+        </select>
+
+        <label>Diagnostic Services:</label>
+        <input type="text" class="editable" name="diagnostic_services" data-key="diagnostic_services"
+          value="{{ data.diagnostic_services }}">
+
+        <p class="status-message"></p>
+      </div>
+
+      {% else %}
+      <div class="card">
+        <p class="error">{{ error }}</p>
+      </div>
+      {% endif %}
+      <!-- Edit, Save, and Cancel Buttons -->
+      <div style="margin-top: 15px;">
+        <button id="editBtn">Edit</button>
+        <button id="saveBtn" style="display: none;">Save</button>
+        <button id="cancelBtn" style="display: none;">Cancel</button>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const editBtn = document.getElementById("editBtn");
+          const saveBtn = document.getElementById("saveBtn");
+          const cancelBtn = document.getElementById("cancelBtn");
+          const inputs = document.querySelectorAll(".editable");
+          let originalValues = {};
+
+          // Disable inputs initially
+          inputs.forEach(input => input.setAttribute("disabled", "true"));
+
+          // Enable editing on "Edit" click
+          editBtn.addEventListener("click", function () {
+            inputs.forEach(input => {
+              originalValues[input.dataset.key] = input.value; // Store original values
+              input.removeAttribute("disabled"); // Enable editing
+            });
+
+            editBtn.style.display = "none";
+            saveBtn.style.display = "inline-block";
+            cancelBtn.style.display = "inline-block";
+          });
+
+          // Save Changes on "Save" click
+          saveBtn.addEventListener("click", function () {
+            let updatedData = {};
+
+            inputs.forEach(input => {
+              updatedData[input.dataset.key] = input.value; // Collect updated data
+              input.setAttribute("disabled", "true"); // Disable editing
+            });
+
+            // Include hospital_id in the updated data
+            updatedData['hospital_id'] = "{{ data.hospital_id }}";
+
+            // Send the updated data to the backend
+            fetch("/admin_settings", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(data => {
+                document.querySelector(".status-message").innerText = "✅ Changes saved!";
+                setTimeout(() => { document.querySelector(".status-message").innerText = ""; }, 2000);
+              })
+              .catch(error => {
+                console.error("Error:", error);
+                document.querySelector(".status-message").innerText = "❌ Error saving changes!";
+              });
+
+            // Reset button visibility
+            editBtn.style.display = "inline-block";
+            saveBtn.style.display = "none";
+            cancelBtn.style.display = "none";
+          });
+
+          // Cancel Editing on "Cancel" click
+          cancelBtn.addEventListener("click", function () {
+            inputs.forEach(input => {
+              input.value = originalValues[input.dataset.key]; // Restore original values
+              input.setAttribute("disabled", "true"); // Disable editing
+            });
+
+            editBtn.style.display = "inline-block";
+            saveBtn.style.display = "none";
+            cancelBtn.style.display = "none";
+          });
+        });
+      </script>
+
+    </div>
+
+    <!-- JavaScript for Auto-Saving Changes -->
+    <script>
+      document.querySelectorAll(".editable").forEach(input => {
+        input.addEventListener("change", function () {
+          let key = this.dataset.key;
+          let value = this.value;
+
+          // Include hospital_id in the updated data
+          let updatedData = { key: key, value: value, hospital_id: "{{ data.hospital_id }}" };
+
+          fetch("/admin_settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData)
+          })
+            .then(response => response.json())
+            .then(data => {
+              document.querySelector(".status-message").innerText = "✅ Changes saved!";
+              setTimeout(() => { document.querySelector(".status-message").innerText = ""; }, 2000);
+            })
+            .catch(error => {
+              console.error("Error:", error);
+              document.querySelector(".status-message").innerText = "❌ Error saving changes!";
+            });
+        });
+      });
+    </script>
+
+    <!-- Modern Styling -->
+    <style>
+      .card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-top: 5px;
+      }
+
+      .status-message {
+        color: green;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .error {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 95%;
+          padding: 15px;
+        }
+
+        input,
+        select {
+          font-size: 0.9rem;
+          padding: 6px;
+        }
+      }
+    </style>
+  </body>
+
+</html>

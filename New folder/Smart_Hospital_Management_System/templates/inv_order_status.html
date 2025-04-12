@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Status</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff3c7;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        background-color: #00637f !important;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #343a40;
+        position: fixed;
+        height: 100%;
+        color: #fff;
+        padding-top: 20px;
+      }
+
+      .sidebar a {
+        padding: 15px;
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        background-color: #575757;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+      }
+
+      .table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+
+      .table th,
+      .table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .table th {
+        background-color: #00637f;
+        color: white;
+      }
+
+      .status-approved {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .status-denied {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">
+        <img
+          src="../static/images/delhi.png"
+          alt="Delhi Logo"
+          class="rounded-circle"
+          width="40"
+          height="40"
+        />
+      </a>
+      <h3 class="text-light">Government of NCT of Delhi</h3>
+    </div>
+    <div class="sidebar">
+      <a href="./inv_admin.html">Dashboard</a>
+      <a href="/">Logout</a>
+    </div>
+    <div class="main-content">
+      <h2>Order Status</h2>
+      <table class="table" id="orderStatusTable">
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity Ordered</th>
+          <th>Order Status</th>
+          <th>Comments</th>
+        </tr>
+
+        {% for data in datas %}
+        <tr>
+          <td>{{data.medicine_name}}</td>
+          <td>{{data.medicine_composition}}</td>
+          <td>{{data.medicine_quantity}}</td>
+          <td>{{data.order_comment}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          url: "http://localhost:3000/api/orders",
+          method: "GET",
+          success: function (data) {
+            var tbody = $("#orderStatusTable tbody");
+            data.forEach(function (order) {
+              var statusClass =
+                order.status === "Approved"
+                  ? "status-approved"
+                  : order.status === "Denied"
+                  ? "status-denied"
+                  : "status-pending";
+              var row = `<tr class="${statusClass}">
+                                    <td>${order.productName}</td>
+                                    <td>${order.quantity}</td>
+                                    <td>${order.status}</td>
+                                    <td>${order.comments}</td>
+                                   </tr>`;
+              tbody.append(row);
+            });
+          },
+          error: function (err) {
+            console.log("Error fetching order data: ", err);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

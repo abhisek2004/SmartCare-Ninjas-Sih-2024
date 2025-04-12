@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bed Availability</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-image: url("../static/images/Pulmonology.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        background-color: #00637f;
+        padding: 10px;
+        color: white;
+      }
+
+      .main-content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .main-content h2 {
+        background-color: #004080;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto;
+        padding: 20px;
+        text-align: center;
+        width: 350px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .dropdown-container {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .dropdown {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 90%;
+        font-size: 16px;
+      }
+
+      button[name="check"] {
+        background-color: #00637f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card h3 {
+        background-color: #004080;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 0;
+      }
+
+      .card p {
+        font-size: 45px;
+        color: #333;
+      }
+
+      .grid-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
+        border: 2px solid rgba(0, 102, 204, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div class="navbar"> -->
+    <!-- <h3 class="text-light">Government of NCT of Delhi</h3> -->
+    <!-- </div> -->
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <h2>Bed Availability Dashboard</h2>
+
+      <!-- Hospital Selection Form -->
+      <div class="dropdown-container">
+        <form action="/bed_status" method="POST">
+          <select id="hospital-dropdown" name="hs_name" class="dropdown">
+            <option value="" disabled selected>Select Hospital</option>
+            {% for hospital in hospitals %}
+            <option value="{{ hospital }}">{{ hospital }}</option>
+            {% endfor %}
+          </select>
+          <br /><br />
+          <button type="submit" name="check">Click to check</button>
+        </form>
+      </div>
+
+      <div class="grid-container">
+        <!-- General Beds Card -->
+        <div class="card">
+          <h3>General Beds</h3>
+          <br>
+          <p id="general-beds">{{ available_beds }}/{{ total_general_beds }}</p>
+        </div>
+
+        <!-- Ventilator Beds Card -->
+        <div class="card">
+          <h3>Ventilator Beds</h3>
+          <br>
+          <p id="ventilator-beds">{{ available_ventilators }}/{{ total_ventilators }}</p>
+        </div>
+
+        <!-- ICU Beds Card -->
+        <div class="card">
+          <h3>ICU Beds</h3>
+          <br>
+          <p id="icu-beds">{{ available_icu_beds }}/{{ total_icu_beds }}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Details Form</title>
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        /* background-color: #f0f2f5; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("../static/images/appintment\ \(2\).jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #333;
+      }
+
+      form {
+        background-color: rgba(255, 255, 255, 0.517);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        max-height: 90vh;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #222;
+        font-size: 24px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #222;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+      }
+
+      .form-group input[type="checkbox"],
+      .form-group input[type="radio"] {
+        width: auto;
+        margin-right: 10px;
+      }
+
+      .form-group textarea {
+        height: 100px;
+      }
+
+      .form-group button {
+        background-color: #00637f;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-group button:hover {
+        background-color: #0056b3;
+      }
+
+      @media (max-width: 768px) {
+        form {
+          padding: 20px;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-group label {
+          margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        .form-group button {
+          padding: 10px 15px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="/admin/add_detail" method="post">
+      <h1>Hospital Details Registration Form</h1>
+      <!-- Basic Information -->
+      <div class="form-group">
+        <label for="hospitalName">Hospital Name:</label>
+        <input type="text" id="hospitalName" name="hospitalName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="hospitalID">Hospital ID/Code:</label>
+        <input type="text" id="hospitalID" name="hospitalID" />
+      </div>
+
+      <!-- Location Information -->
+      <div class="form-group">
+        <label for="addressLine1">Address Line 1:</label>
+        <input type="text" id="addressLine1" name="addressLine1" required />
+      </div>
+
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required />
+      </div>
+      <div class="form-group">
+        <label for="stateProvince">State/Province:</label>
+        <input type="text" id="stateProvince" name="stateProvince" required />
+      </div>
+      <div class="form-group">
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode" name="postalCode" required />
+      </div>
+
+      <!-- Contact Information -->
+      <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" id="contactNumber" name="contactNumber" required />
+      </div>
+      <div class="form-group">
+        <label for="emergencyContactNumber">Emergency Contact Number:</label>
+        <input type="tel" id="emergencyContactNumber" name="emergencyContactNumber" />
+      </div>
+      <div class="form-group">
+        <label for="emailAddress">Email Address:</label>
+        <input type="email" id="emailAddress" name="emailAddress" required />
+      </div>
+      <div class="form-group">
+        <label for="websiteURL">Website URL (optional):</label>
+        <input type="url" id="websiteURL" name="websiteURL" />
+      </div>
+
+      <!-- Capacity and Facilities -->
+      <div class="form-group">
+        <label for="numberOfBeds">Total General Beds:</label>
+        <input type="number" id="numberOfBeds" name="numberOfBeds" required />
+      </div>
+      <div class="form-group">
+        <label for="numberOfBeds">General Beds Occupied:</label>
+        <input type="number" id="Beds_occupied" name="Beds_occupied" required />
+      </div>
+      <div class="form-group">
+        <label for="numberOfICUBeds">Total ICU Beds:</label>
+        <input type="number" id="numberOfICUBeds" name="numberOfICUBeds" required />
+      </div>
+      <div class="form-group">
+        <label for="numberOfICUBeds">ICU Beds Occupied:</label>
+        <input type="number" id="icu_occupied" name="icu_occupied" required />
+      </div>
+      <div class="form-group">
+        <label for="numberOfVentilators">Toatal Ventilators Bed:</label>
+        <input type="number" id="numberOfVentilators" name="numberOfVentilators" required />
+      </div>
+      <div class="form-group">
+        <label for="numberOfVentilators">Ventilators Bed Occupied:</label>
+        <input type="number" id="ventilator_occupied" name="ventilator_occupied" required />
+      </div>
+      <div class="form-group">
+        <label for="emergencyDepartment">Emergency Department:</label>
+        <select id="emergencyDepartment" name="emergencyDepartment" required>
+          <option value="">Select Yes or No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Select Specialization(s):</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="specialization[]" value="Cardiology"> Cardiology</label>
+          <label><input type="checkbox" name="specialization[]" value="Emergency Medicine"> Emergency Medicine</label>
+          <label><input type="checkbox" name="specialization[]" value="General Medicine"> General Medicine</label>
+          <label><input type="checkbox" name="specialization[]" value="General Checkup"> General Checkup</label>
+          <label><input type="checkbox" name="specialization[]" value="Surgery"> Surgery</label>
+          <label><input type="checkbox" name="specialization[]" value="Neurology"> Neurology</label>
+          <label><input type="checkbox" name="specialization[]" value="Pediatrics"> Pediatrics</label>
+          <label><input type="checkbox" name="specialization[]" value="Radiology"> Radiology</label>
+          <label><input type="checkbox" name="specialization[]" value="Infectious Diseases"> Infectious Diseases</label>
+          <label><input type="checkbox" name="specialization[]" value="Gastroenterology"> Gastroenterology</label>
+          <label><input type="checkbox" name="specialization[]" value="ENT (Ear, Nose, Throat)"> ENT (Ear, Nose,
+            Throat)</label>
+          <label><input type="checkbox" name="specialization[]" value="Burn & Plastic Surgery"> Burn & Plastic
+            Surgery</label>
+          <label><input type="checkbox" name="specialization[]" value="COVID-19"> COVID-19</label>
+          <label><input type="checkbox" name="specialization[]" value="Pulmonology"> Pulmonology</label>
+
+          <!-- Other Important Specializations -->
+          <label><input type="checkbox" name="specialization[]" value="Critical Care Medicine"> Critical Care
+            Medicine</label>
+          <label><input type="checkbox" name="specialization[]" value="Orthopedic Surgery"> Orthopedic Surgery</label>
+          <label><input type="checkbox" name="specialization[]" value="Neurosurgery"> Neurosurgery</label>
+          <label><input type="checkbox" name="specialization[]" value="Oncology"> Oncology</label>
+          <label><input type="checkbox" name="specialization[]" value="Anesthesiology"> Anesthesiology</label>
+          <label><input type="checkbox" name="specialization[]" value="Obstetrics & Gynecology"> Obstetrics &
+            Gynecology</label>
+          <label><input type="checkbox" name="specialization[]" value="Nephrology"> Nephrology</label>
+          <label><input type="checkbox" name="specialization[]" value="Hematology"> Hematology</label>
+          <label><input type="checkbox" name="specialization[]" value="Urology"> Urology</label>
+          <label><input type="checkbox" name="specialization[]" value="Toxicology"> Toxicology</label>
+        </div>
+
+        <style>
+          .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+
+          .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 200px;
+            /* Adjust width as needed */
+          }
+
+          .checkbox-group input {
+            accent-color: #007b7b;
+            /* Custom checkbox color */
+          }
+        </style>
+      </div>
+
+
+
+
+
+      <!-- Operational Details -->
+      <div class="form-group">
+        <label for="hospitalOperatingHours">Hospital Operating Hours:</label>
+        <input type="text" id="hospitalOperatingHours" name="hospitalOperatingHours" required />
+      </div>
+      <div class="form-group">
+        <label for="visitingHours">Visiting Hours:</label>
+        <input type="text" id="visitingHours" name="visitingHours" required />
+      </div>
+      <div class="form-group">
+        <label for="pharmacyOnSite">Pharmacy On-site:</label>
+        <select id="pharmacyOnSite" name="pharmacyOnSite" required>
+          <option value="">Select Yes or No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- Staff Information -->
+
+      <div class="form-group">
+        <label for="totalNumberOfNurses">Total Number of Nurses:</label>
+        <input type="number" id="totalNumberOfNurses" name="totalNumberOfNurses" required />
+      </div>
+      <div class="form-group">
+        <label for="administrativeStaffCount">Administrative Staff Count:</label>
+        <input type="number" id="administrativeStaffCount" name="administrativeStaffCount" required />
+      </div>
+
+      <!-- Additional Services -->
+      <div class="form-group">
+        <label for="ambulanceServices">Ambulance Services:</label>
+        <select id="ambulanceServices" name="ambulanceServices" required>
+          <option value="">Select Yes or No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="bloodBank">Blood Bank:</label>
+        <select id="bloodBank" name="bloodBank" required>
+          <option value="">Select Yes or No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="diagnosticServices">Enter Diagnostic Services:</label>
+        <textarea id="diagnosticServices" name="diagnosticServices" rows="4"
+          placeholder="Enter Diagnostic Services"></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+
+</html>

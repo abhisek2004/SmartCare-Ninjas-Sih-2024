@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-image: url(../static/images/Doctor_emergency_Scheduling.jpg);
+        margin: 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .navbar {
+        background-color: #00637f !important;
+        padding: 10px;
+        color: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle-btn {
+        margin-right: 15px;
+        cursor: pointer;
+      }
+
+      .sidebar_menu {
+        width: 250px;
+        background-color: #343a40;
+        position: fixed;
+        height: 100%;
+        color: #fff;
+        padding-top: 20px;
+        overflow-y: auto;
+        transition: width 0.3s;
+      }
+
+      .sidebar_menu.collapsed {
+        width: 0;
+        overflow: hidden;
+      }
+
+      .sidebar_menu ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar_menu ul li {
+        padding: 15px;
+        border-bottom: 1px solid #575757;
+      }
+
+      .sidebar_menu ul li a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar_menu ul li a:hover {
+        background-color: #575757;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.3s;
+      }
+
+      .main-content.collapsed {
+        margin-left: 0;
+      }
+
+      .card {
+        background-color: #fff8e3ac;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .card h3 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .card p {
+        font-size: 18px;
+        color: #333;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+      }
+
+      .footer {
+        background-color: #00637f;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar_menu {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+
+        .sidebar_menu.collapsed {
+          width: 0;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+      }
+
+      .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-around;
+      }
+
+      .card {
+        background: linear-gradient(135deg, #eff4f3, #09d769);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        min-width: 200px;
+        max-width: 250px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card i {
+        font-size: 30px;
+        margin-bottom: 10px;
+        color: white;
+      }
+
+      .card h3 {
+        font-size: 18px;
+        margin: 5px 0;
+        text-transform: uppercase;
+      }
+
+      .card p {
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #1a1a2e;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding-top: 20px;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .sidebar.collapsed {
+        width: 80px;
+      }
+
+      .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        font-size: 1.2rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+      }
+
+      .logo i {
+        font-size: 1.5rem;
+        color: #00c9a7;
+      }
+
+      .logo-text {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .sidebar.collapsed .logo-text {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .toggle-btn {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .toggle-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+      }
+
+      .sidebar-menu li {
+        padding: 15px 20px;
+        transition: background 0.3s ease-in-out;
+      }
+
+      .sidebar-menu li:hover {
+        background-color: #00c9a7;
+      }
+
+      .sidebar-menu a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 1rem;
+        transition: padding 0.3s ease-in-out;
+      }
+
+      .sidebar-menu a i {
+        font-size: 1.2rem;
+        transition: margin-right 0.3s ease-in-out;
+      }
+
+      .sidebar.collapsed .sidebar-menu a span {
+        display: none;
+      }
+
+      .sidebar.collapsed .sidebar-menu a i {
+        margin-right: 0;
+      }
+
+      /* Main Content Adjustment */
+      .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .main-content.collapsed {
+        margin-left: 80px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-user-shield"></i>
+          <!-- <span class="logo-text">Super Admin</span> -->
+        </div>
+        <div class="toggle-btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href="/superadmin/addHospital"><i class="fas fa-hospital"></i><span>Add Hospital</span></a>
+        </li>
+        <li>
+          <a href="/superadmin/checkHospitalStatus"><i class="fas fa-user-md"></i><span>Check Hospital Status</span></a>
+        </li>
+        <!-- <li>
+          <a href="/superadmin/feedback"><i class="fas fa-comments"></i><span>Feedback</span></a>
+        </li> -->
+        <li>
+          <a href="/superadmin_logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </li>
+      </ul>
+      <script>
+        function toggleSidebar() {
+          const sidebar = document.querySelector(".sidebar");
+          const mainContent = document.querySelector(".main-content");
+          sidebar.classList.toggle("collapsed");
+          mainContent.classList.toggle("collapsed");
+        }
+      </script>
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+      <h2>Super Admin Dashboard</h2>
+      <div class="grid-container">
+        <div class="card">
+          <i class="fa-solid fa-hospital"></i>
+          <h3>Total Hospitals</h3>
+          <p id="total-hospitals">{{no_hospital}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-user-md"></i>
+          <h3>Total Doctors</h3>
+          <p id="total-doctors">{{doctor}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-user-injured"></i>
+          <h3>Total Active Patients</h3>
+          <p id="total-active-patients">{{patient}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-user-nurse"></i>
+          <h3>Total Nurses</h3>
+          <p id="total-nurses">{{total_nurse}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-briefcase-medical"></i>
+          <h3>Total Admin Staff</h3>
+          <p id="total-admin-staff">{{total_adminstaff}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-procedures"></i>
+          <h3>Total Ventilator Beds</h3>
+          <p id="total-opd-beds">
+            {{available_ventilators}}/{{total_ventilators}}
+          </p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-bed"></i>
+          <h3>Total ICU Beds</h3>
+          <p id="total-icu-beds">{{available_icu_beds}}/{{total_icu_beds}}</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-warehouse"></i>
+          <h3>Total General Wards</h3>
+          <p id="total-general-wards">{{available_beds}}/{{total_beds}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts-container">
+      <canvas id="hospitalStatsChart"></canvas>
+      <!-- <canvas id="bedAvailabilityChart"></canvas> -->
+      <canvas id="patientTrendsChart"></canvas>
+    </div>
+    <div class="charts-container">
+      <canvas id="staffDistributionChart"></canvas>
+      <canvas id="generalBedsChart"></canvas>
+      <style>
+        .charts-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          padding: 20px;
+          width: 100%;
+        }
+
+        .charts-container canvas {
+          max-width: 600px;
+          max-height: 350px;
+          background: rgba(255, 255, 255, 0.759);
+          border-radius: 10px;
+          padding: 10px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+      </style>
+    </div>
+    <div class="charts-container">
+
+      <canvas id="icuBedsChart"></canvas>
+      <canvas id="ventilatorChart"></canvas>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Toggle Sidebar Visibility
+      document
+        .querySelector(".toggle-btn")
+        .addEventListener("click", function () {
+          const sidebar = document.querySelector(".sidebar_menu");
+          const mainContent = document.querySelector(".main-content");
+          sidebar.classList.toggle("collapsed");
+          mainContent.classList.toggle("collapsed");
+        });
+
+      // Function to load dashboard summary
+      async function loadDashboardSummary() {
+        try {
+          const response = await fetch("/dashboard-summary");
+          const data = await response.json();
+
+          document.getElementById("total-hospitals").textContent =
+            data.totalHospitals;
+          document.getElementById("total-doctors").textContent =
+            data.totalDoctors;
+          document.getElementById("total-active-patients").textContent =
+            data.totalActivePatients;
+          document.getElementById("total-inventory-distributors").textContent =
+            data.totalInventoryDistributors;
+          document.getElementById("total-nurses").textContent =
+            data.totalNurses;
+          document.getElementById("total-admin-staff").textContent =
+            data.totalAdminStaff;
+          document.getElementById("total-opd-beds").textContent =
+            data.totalOpdBeds;
+          document.getElementById("total-icu-beds").textContent =
+            data.totalIcuBeds;
+          document.getElementById("total-general-wards").textContent =
+            data.totalGeneralWards;
+        } catch (error) {
+          console.error("Error loading dashboard summary:", error);
+        }
+      }
+
+      // Load Dashboard Summary on Page Load
+      loadDashboardSummary();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // 📌 Data from Flask/Jinja
+      const totalHospitals = {{ no_hospital }};
+      const totalDoctors = {{ doctor }};
+      const totalPatients = {{ patient }};
+      const totalNurses = {{ total_nurse }};
+      const totalAdminStaff = {{ total_adminstaff }};
+
+      const availableICUBeds = {{ available_icu_beds }};
+      const totalICUBeds = {{ total_icu_beds }};
+      const availableVentilators = {{ available_ventilators }};
+      const totalVentilators = {{ total_ventilators }};
+      const availableGeneralBeds = {{ available_beds }};
+      const totalGeneralBeds = {{ total_beds }};
+
+      // 🔹 1️⃣ Bar Chart: Hospital Statistics
+      new Chart(document.getElementById('hospitalStatsChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['Hospitals', 'Doctors', 'Patients', 'Nurses', 'Admin Staff'],
+          datasets: [{
+            label: 'Count',
+            data: [totalHospitals, totalDoctors, totalPatients, totalNurses, totalAdminStaff],
+            backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0', '#E91E63'],
+            borderColor: '#333',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // 🔹 2️⃣ Doughnut Chart: Bed Availability
+      // new Chart(document.getElementById('bedAvailabilityChart').getContext('2d'), {
+      //   type: 'doughnut',
+      //   data: {
+      //     labels: ['ICU Beds Available', 'ICU Beds Used', 'Ventilators Available', 'Ventilators Used', 'General Beds Available', 'General Beds Used'],
+      //     datasets: [{
+      //       label: 'Beds',
+      //       data: [
+      //         availableICUBeds, totalICUBeds - availableICUBeds,
+      //         availableVentilators, totalVentilators - availableVentilators,
+      //         availableGeneralBeds, totalGeneralBeds - availableGeneralBeds
+      //       ],
+      //       backgroundColor: ['#4CAF50', '#F44336', '#03A9F4', '#FFC107', '#8BC34A', '#9E9E9E']
+      //     }]
+      //   },
+      //   options: { responsive: true }
+      // });
+
+      // 🔹 3️⃣ Line Chart: Active Patient Trends
+      new Chart(document.getElementById('patientTrendsChart').getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: "Active Patients",
+            data: [totalPatients, totalPatients - 5, totalPatients - 10, totalPatients - 15, totalPatients - 10, totalPatients - 5, totalPatients],
+            borderColor: "#dc3545",
+            backgroundColor: "rgba(220, 53, 69, 0.2)",
+            borderWidth: 2,
+            fill: true
+          }]
+        },
+        options: { responsive: true }
+      });
+
+      // 🔹 4️⃣ Pie Chart: Staff Distribution
+      new Chart(document.getElementById('staffDistributionChart').getContext('2d'), {
+        type: 'pie',
+        data: {
+          labels: ['Doctors', 'Nurses', 'Admin Staff'],
+          datasets: [{
+            data: [totalDoctors, totalNurses, totalAdminStaff],
+            backgroundColor: ['#17a2b8', '#ffc107', '#6610f2']
+          }]
+        },
+        options: { responsive: true }
+      });
+    </script>
+    <script>
+      // 🔹 General Beds Usage Chart
+      new Chart(document.getElementById('generalBedsChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['General Beds Available', 'General Beds Used'],
+          datasets: [{
+            data: [availableGeneralBeds, totalGeneralBeds - availableGeneralBeds],
+            backgroundColor: ['#4CAF50', '#F44336']
+          }]
+        },
+        options: { responsive: true }
+      });
+
+      // 🔹 ICU Beds Usage Chart
+      new Chart(document.getElementById('icuBedsChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['ICU Beds Available', 'ICU Beds Used'],
+          datasets: [{
+            data: [availableICUBeds, totalICUBeds - availableICUBeds],
+            backgroundColor: ['#03A9F4', '#FF9800']
+          }]
+        },
+        options: { responsive: true }
+      });
+
+      // 🔹 Ventilator Usage Chart
+      new Chart(document.getElementById('ventilatorChart').getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Ventilators Available', 'Ventilators Used'],
+          datasets: [{
+            data: [availableVentilators, totalVentilators - availableVentilators],
+            backgroundColor: ['#8BC34A', '#9E9E9E']
+          }]
+        },
+        options: { responsive: true }
+      });
+    </script>
+
+  </body>
+
+</html>

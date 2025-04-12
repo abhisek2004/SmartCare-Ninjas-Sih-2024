@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Doctor Emergency Scheduling</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: url(../static/images/Doctor_emergency_Scheduling.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+
+            .container {
+                background: rgba(255, 255, 255, 0.316);
+                /* Clean white background with slight transparency */
+                padding: 25px;
+                border-radius: 15px;
+                text-align: center;
+                width: 420px;
+                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+                position: relative;
+                backdrop-filter: blur(8px);
+                /* Slight blur for glass effect */
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                animation: fadeIn 1s ease-in-out;
+            }
+
+            h2 {
+                color: #007bff;
+                font-size: 26px;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+
+            .emergency-section {
+                background: linear-gradient(135deg, #ff4b5c, #ff6b6b);
+                color: white;
+                padding: 12px;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 16px;
+                margin-bottom: 18px;
+                letter-spacing: 0.5px;
+                box-shadow: 0 4px 10px rgba(255, 75, 92, 0.4);
+            }
+
+            label {
+                display: block;
+                margin: 12px 0 6px;
+                font-weight: 600;
+                color: #333;
+                text-align: left;
+            }
+
+            select,
+            input,
+            textarea {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 14px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background-color: #f8f9fa;
+                transition: 0.3s ease;
+                font-size: 14px;
+                outline: none;
+            }
+
+            select:focus,
+            input:focus,
+            textarea:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+                background-color: white;
+            }
+
+            button {
+                background: linear-gradient(to right, #17ff00, #00b894);
+                color: white;
+                padding: 12px;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3);
+            }
+
+            button:hover {
+                background: linear-gradient(to right, #17ff00);
+                transform: translateY(-3px);
+                box-shadow: 0px 6px 16px rgba(0, 123, 255, 0.5);
+            }
+
+            .hidden {
+                display: none;
+                color: green;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            /* Fade-in animation */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Mobile Responsiveness */
+            @media (max-width: 500px) {
+                .container {
+                    width: 90%;
+                    padding: 15px;
+                }
+
+                h2 {
+                    font-size: 22px;
+                }
+
+                button {
+                    font-size: 14px;
+                }
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h2>Emergency Video Call Scheduling</h2>
+
+            <!-- Emergency Appointment Section -->
+            <div class="emergency-section">
+                {% if emergency_patient %}
+                Emergency Appointment: <strong>{{ emergency_patient.name }}</strong>
+                {% else %}
+                No emergency appointment currently.
+                {% endif %}
+            </div>
+
+            <label for="patient">Select Patient:</label>
+            <select id="patient">
+                {% for contact in appointments %}
+                <option value="{{ contact.name }}">{{ contact.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="date">Select Date & Time:</label>
+            <input type="datetime-local" id="date" min="" max="">
+
+            <label for="message">Message to Patient:</label>
+            <textarea
+                id="message">Join the video call here: https://face-time-video.netlify.app/ Pin to connect - </textarea>
+
+            <button onclick="scheduleAppointment()">Schedule & Send Message</button>
+
+            <p id="confirmation" class="hidden">Appointment Scheduled Successfully! ✅</p>
+        </div>
+
+        <script>
+            function setDateLimits() {
+                let today = new Date();
+                let maxDate = new Date();
+                maxDate.setDate(today.getDate() + 5); // Set max date to 5 days ahead
+
+                let minDateTime = today.toISOString().slice(0, 16); // Format YYYY-MM-DDTHH:MM
+                let maxDateTime = maxDate.toISOString().slice(0, 16);
+
+                document.getElementById("date").setAttribute("min", minDateTime);
+                document.getElementById("date").setAttribute("max", maxDateTime);
+            }
+
+            function scheduleAppointment() {
+                let selectedPatient = document.getElementById("patient").value;
+                let dateTime = document.getElementById("date").value;
+                let message = document.getElementById("message").value;
+                let confirmation = document.getElementById("confirmation");
+
+                if (selectedPatient && dateTime && message) {
+                    confirmation.classList.remove("hidden");
+                    confirmation.textContent = `Appointment with ${selectedPatient} scheduled on ${dateTime}. Message sent: "${message}"`;
+
+                    // Send data to backend
+                    fetch('/schedule-appointment/', {
+                        method: 'POST',
+                        body: JSON.stringify({ patient: selectedPatient, date: dateTime, message: message }),
+                        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCSRFToken() }
+                    });
+
+                } else {
+                    alert("Please fill all fields before scheduling.");
+                }
+            }
+
+            function getCSRFToken() {
+                return document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1];
+            }
+
+            // Set date restrictions when the page loads
+            window.onload = setDateLimits;
+        </script>
+
+    </body>
+
+</html>

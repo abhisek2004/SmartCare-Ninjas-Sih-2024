@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Discharge Form</title>
+    <style>
+      body {
+        font-family: 'Poppins', Arial, sans-serif;
+        background-image: url("../static/images/Hospital_discharge.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        text-align: center;
+        color: #222;
+        font-size: 28px;
+        margin-top: 0;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      form {
+        width: 100%;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.192);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.8s ease-out;
+        font-family: 'Poppins', Arial, sans-serif;
+        /* Ensures the form uses Poppins */
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        /* Ensuring bold labels */
+        margin-bottom: 8px;
+        color: #111;
+        /* Darker color for labels */
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 15px;
+        background-color: #f9f9f9;
+        transition: all 0.3s ease;
+        outline: none;
+        font-family: 'Poppins', Arial, sans-serif;
+      }
+
+      input[type="text"]:focus,
+      input[type="date"]:focus,
+      textarea:focus,
+      select:focus {
+        border-color: #007bff;
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+      }
+
+      textarea {
+        resize: none;
+        height: 100px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #0056b3, #17ff00);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: background 0.3s ease, transform 0.2s ease;
+        font-family: 'Poppins', Arial, sans-serif;
+      }
+
+      input[type="submit"]:hover {
+        background: linear-gradient(135deg, #17ff00, #00b894);
+        transform: translateY(-2px);
+      }
+
+      input[type="submit"]:active {
+        transform: translateY(1px);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Optional - add subtle form border */
+      form {
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+    </style>
+    <style>
+      /* Container for Buttons */
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      /* Style for Submit Button */
+      .btn-submit {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      /* Style for Admin Dashboard Button */
+      .btn-admin {
+        text-decoration: none;
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        display: inline-block;
+      }
+
+      .btn-admin:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="/admin/discharge" method="POST" id="discharge" onsubmit="submitFormAndRedirect()">
+      <h2>Hospital Discharge Details Form</h2>
+
+      <label for="patient_id">Patient ID:</label>
+      <input type="text" id="patient_id" name="patient_id" required />
+
+      <label for="patient_name">Patient Name:</label>
+      <input type="text" id="patient_name" name="patient_name" required />
+
+      <!-- Gender Selection -->
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- Address Field -->
+      <label for="address">Address:</label>
+      <textarea id="address" name="address" rows="3" required></textarea>
+
+      <label for="admission_date">Date of Admission:</label>
+      <input type="date" id="admission_date" name="admission_date" required />
+
+      <label for="discharge_date">Date of Discharge:</label>
+      <input type="date" id="discharge_date" name="discharge_date" required />
+
+      <label for="diagnosis">Diagnosis:</label>
+      <textarea id="diagnosis" name="diagnosis" rows="4" required></textarea>
+
+      <label for="treatment">Treatment Provided:</label>
+      <div class="form-group">
+        <textarea id="treatment" name="treatment" rows="4" required></textarea>
+
+        <label for="category">Select type of bed:</label>
+
+        <select id="bedtype" name="bedtype" required>
+          <option value="" disabled selected>Select Type of Bed</option>
+          <option value="general">General ward</option>
+          <option value="icu">ICU</option>
+          <option value="ventilator">Ventilator</option>
+        </select>
+      </div>
+
+      <label for="doctor_name">Doctor's Name:</label>
+      <input type="text" id="doctor_name" name="doctor_name" required />
+
+      <label for="discharge_summary">Discharge Summary:</label>
+      <textarea id="discharge_summary" name="discharge_summary" rows="4" required></textarea>
+
+      <label for="follow_up_instructions">Follow-up Instructions:</label>
+      <textarea id="follow_up_instructions" name="follow_up_instructions" rows="4" required></textarea>
+
+      <label for="medications">Medications Prescribed:</label>
+      <textarea id="medications" name="medications" rows="4" required></textarea>
+
+      <label for="contact_info">Contact Information:</label>
+      <input type="text" id="contact_info" name="contact_info" required />
+
+      <input type="submit" value="Submit" />
+      <div class="button-container">
+        <a href="/admin" class="btn-admin">Return to Admin Dashboard</a>
+      </div>
+    </form>
+
+    <script>
+      function submitFormAndRedirect() {
+        var form = document.getElementById("discharge");
+        form.submit();
+        console.log("hellof");
+        // Redirect after a delay to ensure the file download starts
+        setTimeout(function () {
+          window.location.href = "/admin";
+        }, 2000); // 2-second delay
+      }
+    </script>
+  </body>
+
+</html>

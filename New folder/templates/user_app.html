@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-image: url(../static/images/userdash.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+      }
+
+      .navbar {
+        background-color: #00637f !important;
+        padding: 10px;
+      }
+
+      .navbar h3 {
+        margin: 0;
+        color: white;
+      }
+
+      .main-content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .appointment-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 380px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border-top: 6px solid #004080;
+        border-bottom: 6px solid #004080;
+      }
+
+      .appointment-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 128, 255, 0.4);
+      }
+
+      .appointment-card h3 {
+        background: #004080;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .appointment-card p {
+        font-size: 15px;
+        color: #444;
+        margin: 6px 0;
+        width: 100%;
+        text-align: left;
+      }
+
+      .highlight {
+        color: #44ff00;
+        font-weight: bold;
+      }
+
+      .queue_number {
+        color: red;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .status {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .status-confirmed {
+        background: #28a745;
+        color: white;
+      }
+
+      /* Download Button 
+      .status-pending {
+        background: #ffc107;
+        color: black;
+      }*/
+
+      .icon {
+        font-size: 16px;
+        color: #00637f;
+        margin-right: 6px;
+      }
+
+      /* Download Button */
+      .download-btn {
+        background: #004080;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .download-btn:hover {
+        background: #006bb3;
+      }
+
+
+      /* Sidebar Styles */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #004080;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 20px;
+        transition: 0.3s ease-in-out;
+      }
+
+      .sidebar.collapsed {
+        width: 80px;
+      }
+
+      .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        color: white;
+      }
+
+      .sidebar .logo i {
+        font-size: 24px;
+      }
+
+      .toggle-btn {
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .sidebar-menu {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sidebar-menu li {
+        margin: 10px 0;
+      }
+
+      .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .sidebar-menu a:hover {
+        background: #006bb3;
+      }
+
+      .sidebar-menu i {
+        font-size: 18px;
+        margin-right: 10px;
+      }
+
+      /* Collapsed Sidebar */
+      .sidebar.collapsed .sidebar-menu span {
+        display: none;
+      }
+
+      .sidebar.collapsed .sidebar-menu a {
+        justify-content: center;
+      }
+
+      .sidebar.collapsed .toggle-btn {
+        text-align: center;
+        width: 100%;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 80px;
+        }
+
+        .sidebar-menu span {
+          display: none;
+        }
+
+        .sidebar-menu a {
+          justify-content: center;
+        }
+      }
+
+
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+
+      .appointment-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 45%;
+        /* Two cards in a row */
+        min-width: 380px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border-top: 6px solid #004080;
+        border-bottom: 6px solid #004080;
+      }
+
+      @media (max-width: 768px) {
+        .appointment-card {
+          width: 100%;
+          /* Full width on smaller screens */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <h3 class="text-light">Government of NCT of Delhi</h3>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-light" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="/appointment">Appointment</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="/bed_status">Bed Availability</a></li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
+              <i class="fas fa-bell"></i>
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link text-light" href="/user_logout">Logout</a></li>
+        </ul>
+      </div>
+    </nav> -->
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-user-shield"></i>
+        </div>
+        <div class="toggle-btn" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li><a href="#"><i class="fas fa-home"></i><span>Home</span></a></li>
+        <li><a href="/appointment"><i class="fas fa-calendar-check"></i><span>Appointment</span></a></li>
+        <li><a href="/bed_status"><i class="fas fa-procedures"></i><span>Bed Availability</span></a></li>
+        <!-- <li><a href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
+            <i class="fas fa-bell"></i><span>Notifications</span>
+          </a>
+        </li> -->
+        <li><a href="/user_logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+      </ul>
+      <script>
+        function toggleSidebar() {
+          document.querySelector(".sidebar").classList.toggle("collapsed");
+        }
+      </script>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h1 style="color: rgba(0, 255, 34, 0.387);">
+        Welcome, <span class="highlight">{{ user.name }}</span>
+      </h1>
+
+      <!-- Appointment Cards Section -->
+      <div class="card-container">
+        {% for contact in appointments %}
+        <div class="appointment-card" id="card-{{ loop.index }}">
+          <h3>Appointment Details</h3>
+          <p><i class="fas fa-user icon"></i><strong>Name:</strong> {{ contact.name }}</p>
+          <p><i class="fas fa-envelope icon"></i><strong>Email:</strong> {{ contact.email }}</p>
+          <p><i class="fas fa-phone icon"></i><strong>Number:</strong> {{ contact.number }}</p>
+          <p><i class="fas fa-calendar-alt icon"></i><strong>Appointment Date:</strong> {{ contact.appointment_date }}
+          </p>
+          <p><i class="fas fa-hospital icon"></i><strong>Hospital Name:</strong> {{ contact.hospital_name }}</p>
+          <p><i class="fas fa-clock icon"></i><strong>Time-slot:</strong> {{ contact.time_slot }}</p>
+          <p><i class="fas fa-stethoscope icon"></i><strong>Department:</strong> {{ contact.speciality }}</p>
+          <p><i class="fas fa-user-md icon"></i><strong>Doctor Name:</strong> {{ contact.appointed_doc }}</p>
+          <p><i class="fas fa-notes-medical icon"></i><strong>Description:</strong> {{ contact.disease_description }}
+          </p>
+          <p class="queue_number"><i class="fas fa-list-ol icon"></i><strong>Queue Number:</strong>
+            {{ contact.queue_number }}
+          </p>
+
+          <!-- {% if contact.status == "Confirmed" %}
+          <span class="status status-confirmed">Confirmed</span>
+          {% else %}
+          <span class="status status-pending">Pending</span>
+          {% endif %} -->
+          <span
+            class="status {% if contact.status == 'Confirmed' %}status-confirmed{% else %}status-pending{% endif %}">
+            {{ contact.status }}
+          </span>
+          <!-- Download PDF Button -->
+          <button class="download-btn" onclick="downloadPDF('{{ loop.index }}')">Download PDF</button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script>
+      function downloadPDF(cardId) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const card = document.getElementById("card-" + cardId);
+        const content = card.innerText;
+
+        doc.setFontSize(14);
+        doc.text(content, 10, 10);
+        doc.save("appointment_details.pdf");
+      }
+    </script>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+      async function downloadPDF(cardId) {
+        const { jsPDF } = window.jspdf;
+        const card = document.getElementById("card-" + cardId);
+        const downloadBtn = card.querySelector(".download-btn");
+
+        // Hide the button before capturing
+        downloadBtn.style.display = "none";
+
+        // Capture the card as an image
+        html2canvas(card, { scale: 3 }).then(canvas => {
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF("p", "mm", "a4");
+
+          const imgWidth = 190; // Fit within A4 width
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+
+          // Get the username from the card
+          const userName = card.querySelector("p strong").nextSibling.nodeValue.trim();
+          pdf.save(`${userName}-Appointment.pdf`);
+
+          // Show the button again after capturing
+          downloadBtn.style.display = "block";
+        });
+      }
+    </script>
+
+    <script>
+      // Function to fetch the latest appointment statuses
+      async function fetchAppointmentStatus() {
+        try {
+          const response = await fetch('/get_appointment_status');
+          const data = await response.json();
+
+          if (data.appointments) {
+            data.appointments.forEach(appointment => {
+              const card = document.getElementById(`card-${appointment.id}`);
+              if (card) {
+                const statusElement = card.querySelector('.status');
+                if (appointment.status === "Confirmed") {
+                  statusElement.classList.remove('status-pending');
+                  statusElement.classList.add('status-confirmed');
+                  statusElement.textContent = "Confirmed";
+                } else {
+                  statusElement.classList.remove('status-confirmed');
+                  statusElement.classList.add('status-pending');
+                  statusElement.textContent = "Pending";
+                }
+              }
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching appointment statuses:", error);
+        }
+      }
+
+      // Poll the backend every 10 seconds to update statuses
+      setInterval(fetchAppointmentStatus, 10000);
+
+      // Initial fetch when the page loads
+      fetchAppointmentStatus();
+    </script>
+
+  </body>
+
+</html>
