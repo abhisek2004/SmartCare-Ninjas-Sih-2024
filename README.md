@@ -357,41 +357,64 @@ A robust technological solution that addresses queuing models, bed availability,
 ### Smart_Hospital_Management_System  NECESSARY DIAGRAMS 
 
 Check out our NECESSARY DIAGRAMS for a detailed overview of the project! 📑
+
+---
+
+**Flow_Chart**
+
 ![final flowchart](https://github.com/user-attachments/assets/f93aab95-3391-4cf2-8571-7acf0dbc9288)
 
 ---
+
+**ER_DIAGRAM**
 
 ![ER DIAGRAM  (2)](https://github.com/user-attachments/assets/60b7afbd-2967-42b1-9156-73cc6ad92e70)
 
 ---
 
+**Project_Chart**
+
 ![Project Chart](https://github.com/user-attachments/assets/32021199-aa2f-48e7-959d-7aeb40521ad3)
 
 ---
+
+**DFD_Leve_0**
 
 ![Level-0_DFD_page-0001](https://github.com/user-attachments/assets/52d50fed-cdb1-4d72-95dc-d5de246d8866)
 
 ---
 
+**DFD_Leve_l**
+
 ![DFD_Level_1_page-0001](https://github.com/user-attachments/assets/5b79f29f-1006-4eb7-a87a-58ad5fb9c157)
 
 ---
+
+**Class_Diagram**
 
 ![Class_Diagram_page-0001](https://github.com/user-attachments/assets/20beba15-958a-4381-b510-db83f51a40c1)
 
 ---
 
+**Activity_Diagram**
+
 ![Activity_Diagram_page-0001](https://github.com/user-attachments/assets/f4c18105-e1cb-4647-8121-7a5a667358b8)
 
 ---
+
+**Collaboration_Diagram**
 
 ![Collaboration_Diagram_page-0001](https://github.com/user-attachments/assets/21cc7070-dc03-44f4-b8ce-6c2c03e9e901)
 
 ---
 
+**Structured_Chart**
+
 ![Structured_Chart_page-0001](https://github.com/user-attachments/assets/cf242c81-6909-4b26-aa1d-93d0a818ebaa)
 
 ---
+
+**UML_Use_Case**
 
 ![UML_use_case_page-0001](https://github.com/user-attachments/assets/9f4634bc-33d2-4a94-9346-7bc84592820e)
 
