@@ -357,18 +357,7 @@ A robust technological solution that addresses queuing models, bed availability,
 ### Smart_Hospital_Management_System  NECESSARY DIAGRAMS 
 
 Check out our NECESSARY DIAGRAMS for a detailed overview of the project! 📑
-![MINOR PEOJECT-1](https://github.com/user-attachments/assets/c81631c0-8377-43c8-b67c-c5efad389907)
-![MINOR PEOJECT-2](https://github.com/user-attachments/assets/37a00ae1-3479-42d7-8b8e-199da1a3c78a)
-![MINOR PEOJECT-3](https://github.com/user-attachments/assets/b9691dfd-ab56-44ec-9091-b926368a7520)
-![MINOR PEOJECT-4](https://github.com/user-attachments/assets/3c335dff-b256-409d-8921-c5c7ee0adb6b)
-![MINOR PEOJECT-5](https://github.com/user-attachments/assets/7137bf20-98ea-42fd-9a7b-d66906dc0db3)
-![MINOR PEOJECT-6](https://github.com/user-attachments/assets/a568e222-27c2-4c6b-a4cb-f028e64484b2)
-![MINOR PEOJECT-7](https://github.com/user-attachments/assets/666bd1ec-15c6-469f-b6d3-2b7056cb3aa3)
-![MINOR PEOJECT-8](https://github.com/user-attachments/assets/49ef52f6-c097-499b-a27d-81874115ac2b)
-![MINOR PEOJECT-9](https://github.com/user-attachments/assets/7debc023-5656-4f2b-8ecc-4ede30ab1893)
-![MINOR PEOJECT-10](https://github.com/user-attachments/assets/8dd03013-3f82-431c-af7d-4469b9c1dcf3)
-![MINOR PEOJECT-11](https://github.com/user-attachments/assets/f35ae29e-d541-4e56-bde8-40d59fea4552)
-![MINOR PEOJECT-12](https://github.com/user-attachments/assets/6d33beb1-4bcd-4a85-822c-7c32d2bb12fc)
+
 
 ---
 
