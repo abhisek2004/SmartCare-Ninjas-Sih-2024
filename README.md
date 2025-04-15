@@ -358,6 +358,7 @@ A robust technological solution that addresses queuing models, bed availability,
 
 Check out our NECESSARY DIAGRAMS for a detailed overview of the project! 📑
 ![final flowchart](https://github.com/user-attachments/assets/f93aab95-3391-4cf2-8571-7acf0dbc9288)
+![ER DIAGRAM  (2)](https://github.com/user-attachments/assets/60b7afbd-2967-42b1-9156-73cc6ad92e70)
 
 
 
