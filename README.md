@@ -354,7 +354,9 @@ A robust technological solution that addresses queuing models, bed availability,
 
 **📊 Project Presentation**
 
-### Smart_Hospital_Management_System PPT
+### Smart_Hospital_Management_System  NECESSARY DIAGRAMS
+![image](https://github.com/user-attachments/assets/c64f0c3e-19e4-47d2-abaf-ec7680293052)
+ 
 
 Check out our PowerPoint presentation for a detailed overview of the project! 📑
 ![MINOR PEOJECT-1](https://github.com/user-attachments/assets/c81631c0-8377-43c8-b67c-c5efad389907)
