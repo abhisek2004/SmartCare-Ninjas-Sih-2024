@@ -357,6 +357,11 @@ A robust technological solution that addresses queuing models, bed availability,
 ### Smart_Hospital_Management_System  NECESSARY DIAGRAMS 
 
 Check out our NECESSARY DIAGRAMS for a detailed overview of the project! 📑
+![final flowchart](https://github.com/user-attachments/assets/f93aab95-3391-4cf2-8571-7acf0dbc9288)
+
+
+
+
 
 
 ---
